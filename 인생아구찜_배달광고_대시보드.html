@@ -336,10 +336,13 @@ let SCRIPT_URL = '';
 
 function init() {
   SCRIPT_URL = localStorage.getItem(LS_KEY) || '';
+  // 로딩 오버레이 먼저 숨김
+  document.getElementById('loadingOverlay').classList.add('hidden');
   if (SCRIPT_URL) {
     document.getElementById('setupScreen').classList.add('hidden');
     loadAllData();
   }
+  // URL 없으면 설정화면 자동 표시 (이미 기본 표시 상태)
 }
 
 function saveAndConnect() {
@@ -366,35 +369,64 @@ function resetSetup() {
 let rawAd=[], rawCp=[], filteredAd=[], filteredCp=[];
 let activeTab=PO[0], charts={}, wkCharts={};
 
-async function loadAllData() {
+function loadAllData() {
   document.getElementById('loadingOverlay').classList.remove('hidden');
   document.getElementById('errorBanner').classList.remove('show');
-  try {
-    const res  = await fetch(SCRIPT_URL);
-    const data = await res.json();
-    if (data.status === 'error') throw new Error(data.message);
 
-    rawAd = (data.ad||[]).map(r=>({ ...r,
-      '광고비':+r['광고비']||0,'노출수':+r['노출수']||0,'클릭수':+r['클릭수']||0,
-      '전환수':+r['전환수']||0,'전환매출':+r['전환매출']||0,'기존매출':+r['기존매출']||0,
-      '연도':String(r['연도']||''),'월':String(r['월']||''),
-    }));
-    rawCp = (data.cp||[]).map(r=>({ ...r,
-      '발행수':+r['발행수']||0,'사용수':+r['사용수']||0,
-      '할인액':+r['할인액']||0,'쿠폰매출':+r['쿠폰매출']||0,
-      '연도':String(r['연도']||''),'월':String(r['월']||''),
-    }));
+  // 기존 JSONP 스크립트 태그 제거
+  const old = document.getElementById('jsonp-script');
+  if (old) old.remove();
+  if (window.__jsonpTimeout) clearTimeout(window.__jsonpTimeout);
 
-    buildFilterOptions();
-    applyFilter();
-    document.getElementById('lastUpdated').textContent = '업데이트 ' + (data.updated||'');
-  } catch(e) {
-    document.getElementById('errorBanner').classList.add('show');
-    document.getElementById('errorMsg').textContent = e.message || 'Apps Script URL을 확인해주세요.';
-    document.getElementById('lastUpdated').textContent = '불러오기 실패';
-  } finally {
+  // 타임아웃 10초
+  window.__jsonpTimeout = setTimeout(() => {
     document.getElementById('loadingOverlay').classList.add('hidden');
-  }
+    document.getElementById('errorBanner').classList.add('show');
+    document.getElementById('errorMsg').textContent = '응답 시간 초과 — Apps Script URL을 확인해주세요.';
+    document.getElementById('lastUpdated').textContent = '불러오기 실패';
+  }, 10000);
+
+  // JSONP 콜백 함수
+  window.__dashboardCallback = function(data) {
+    clearTimeout(window.__jsonpTimeout);
+    try {
+      if (data.status === 'error') throw new Error(data.message);
+
+      rawAd = (data.ad||[]).map(r=>({ ...r,
+        '광고비':+r['광고비']||0,'노출수':+r['노출수']||0,'클릭수':+r['클릭수']||0,
+        '전환수':+r['전환수']||0,'전환매출':+r['전환매출']||0,'기존매출':+r['기존매출']||0,
+        '연도':String(r['연도']||''),'월':String(r['월']||''),
+      }));
+      rawCp = (data.cp||[]).map(r=>({ ...r,
+        '발행수':+r['발행수']||0,'사용수':+r['사용수']||0,
+        '할인액':+r['할인액']||0,'쿠폰매출':+r['쿠폰매출']||0,
+        '연도':String(r['연도']||''),'월':String(r['월']||''),
+      }));
+
+      buildFilterOptions();
+      applyFilter();
+      document.getElementById('lastUpdated').textContent = '업데이트 ' + (data.updated||'');
+    } catch(e) {
+      document.getElementById('errorBanner').classList.add('show');
+      document.getElementById('errorMsg').textContent = e.message || 'Apps Script URL을 확인해주세요.';
+      document.getElementById('lastUpdated').textContent = '불러오기 실패';
+    } finally {
+      document.getElementById('loadingOverlay').classList.add('hidden');
+    }
+  };
+
+  // JSONP 스크립트 태그 삽입
+  const script = document.createElement('script');
+  script.id = 'jsonp-script';
+  script.src = SCRIPT_URL + '?callback=__dashboardCallback';
+  script.onerror = () => {
+    clearTimeout(window.__jsonpTimeout);
+    document.getElementById('loadingOverlay').classList.add('hidden');
+    document.getElementById('errorBanner').classList.add('show');
+    document.getElementById('errorMsg').textContent = 'Apps Script 연결 실패 — URL을 확인해주세요.';
+    document.getElementById('lastUpdated').textContent = '불러오기 실패';
+  };
+  document.body.appendChild(script);
 }
 
 // ── FILTER ──
