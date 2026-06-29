@@ -285,7 +285,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
       <h1 class="site-title"><em>팀</em> 대시보드</h1>
       <div class="mission-pill" data-editable="1" id="header-mission">브랜드를 알리고, 가맹 유입을 만들고, 점주 매출을 받친다</div>
       <div class="header-meta">
-        <span class="meta-chip">팀장 최찬솔</span>
+        <span class="meta-chip">최찬솔</span>
         <span class="meta-chip">마케팅 심수민</span>
         <span class="meta-chip">디자이너 윤지수</span>
       </div>
@@ -397,7 +397,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
           <div class="role-card-head">
             <div class="role-avatar" style="background:var(--chan)">C</div>
             <div>
-              <div class="role-name" style="color:var(--chan)">팀장 — 최찬솔</div>
+              <div class="role-name" style="color:var(--chan)">최찬솔</div>
               <div class="role-role" data-editable="1" id="chan-role-desc">기반 설계 + 타팀 조율</div>
             </div>
           </div>
@@ -443,7 +443,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
           <div class="role-card-head">
             <div class="role-avatar" style="background:var(--ds)">D</div>
             <div>
-              <div class="role-name" style="color:var(--ds)">디자인 윤지수</div>
+              <div class="role-name" style="color:var(--ds)">디자이너 윤지수</div>
               <div class="role-role" data-editable="1" id="ds-role-desc">브랜드 기준 파악 + 요청 구조 정립</div>
             </div>
           </div>
@@ -485,7 +485,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
             <div class="member-col-head">
               <div class="role-avatar" style="background:var(--chan);width:26px;height:26px;font-size:11px">C</div>
               <div style="flex:1">
-                <div style="font-size:12px;font-weight:700;color:var(--chan)">팀장 최찬솔</div>
+                <div style="font-size:12px;font-weight:700;color:var(--chan)">최찬솔</div>
                 <div class="member-col-prog" id="prog-chan">—</div>
               </div>
             </div>
@@ -507,7 +507,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
             <div class="member-col-head">
               <div class="role-avatar" style="background:var(--ds);width:26px;height:26px;font-size:11px">윤</div>
               <div style="flex:1">
-                <div style="font-size:12px;font-weight:700;color:var(--ds)">디자인 윤지수</div>
+                <div style="font-size:12px;font-weight:700;color:var(--ds)">디자이너 윤지수</div>
                 <div class="member-col-prog" id="prog-ds">—</div>
               </div>
             </div>
@@ -1247,7 +1247,7 @@ function confirmIdentity(){
 
 function applyIdentity(identity){
   currentUser = identity.member;
-  const names = {chan:'팀장 최찬솔 (전체 편집)',mk:'심수민 (본인 편집)',ds:'윤지수 (본인 편집)'};
+  const names = {chan:'최찬솔 (전체 편집)',mk:'심수민 (본인 편집)',ds:'윤지수 (본인 편집)'};
   const dotColors = {chan:'#5ABF7A',mk:'#5AABCF',ds:'#5ABF5A'};
   document.getElementById('auth-label').textContent = names[currentUser]||'접속자 선택';
   document.getElementById('auth-dot').style.background = dotColors[currentUser]||'#6A9FA0';
