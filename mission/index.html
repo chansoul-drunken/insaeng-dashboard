@@ -167,6 +167,29 @@ footer strong{color:#6A7FA0}
 
 
 
+
+<style id="li-edit-css">
+.li-del{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:14px;height:14px;border-radius:50%;margin-left:5px;
+  background:#F0C0C0;border:none;cursor:pointer;
+  font-size:9px;color:#8B1A1A;flex-shrink:0;vertical-align:middle;
+  line-height:1;padding:0;
+}
+.li-del:hover{background:#F09595}
+.li-add{
+  display:block;font-size:11px;color:#7B4F00;background:none;
+  border:none;cursor:pointer;padding:3px 0 0 0;
+  font-family:inherit;text-align:left;
+}
+.li-add:hover{text-decoration:underline}
+body.edit-mode .task-detail li{
+  outline:1.5px dashed transparent;border-radius:3px;padding:1px 3px;
+}
+body.edit-mode .task-detail li:focus{
+  outline:1.5px dashed #C8A97A;background:rgba(200,169,122,.07);
+}
+</style>
 </head>
 <body class="">
 
@@ -823,35 +846,68 @@ function toggleEdit(){
   btn.textContent = editOn ? '✕ 편집 종료' : '✏️ 편집 모드';
   btn.classList.toggle('on', editOn);
   if(editOn){
-    // task-text contenteditable 활성화
+    // ① task-text 편집 활성화
     document.querySelectorAll('.task-text').forEach(el=>{
       el.contentEditable = 'true';
       el.setAttribute('spellcheck','false');
     });
-    // 삭제 버튼 생성 (없는 경우만)
-    document.querySelectorAll('.task-item').forEach(card=>{
-      if(!card.querySelector('.task-del-btn')){
-        const btn = document.createElement('button');
-        btn.className = 'task-del-btn';
-        btn.textContent = '×';
-        btn.title = '태스크 삭제';
-        btn.onclick = e=>{ e.stopPropagation(); if(confirm('이 태스크를 삭제할까요?')) card.remove(); };
-        card.querySelector('.task-main').style.position = 'relative';
-        card.querySelector('.task-main').appendChild(btn);
+    // ② task-detail li 편집 활성화 + × 버튼
+    document.querySelectorAll('.task-detail li').forEach(li=>{
+      li.contentEditable = 'true';
+      li.setAttribute('spellcheck','false');
+      if(!li.querySelector('.li-del')){
+        const x = document.createElement('button');
+        x.className = 'li-del';
+        x.textContent = '×';
+        x.onclick = e=>{ e.stopPropagation(); li.remove(); };
+        li.appendChild(x);
       }
     });
-    // 태스크 추가 버튼 생성 (task-list마다)
+    // ③ task-detail ul마다 줄 추가 버튼
+    document.querySelectorAll('.task-detail ul').forEach(ul=>{
+      if(!ul.querySelector('.li-add')){
+        const b = document.createElement('button');
+        b.className = 'li-add';
+        b.textContent = '＋ 줄 추가';
+        b.onclick = ()=>{
+          const li = document.createElement('li');
+          li.textContent = '새 세부 내용';
+          li.contentEditable = 'true';
+          li.setAttribute('spellcheck','false');
+          const x = document.createElement('button');
+          x.className = 'li-del'; x.textContent = '×';
+          x.onclick = e=>{ e.stopPropagation(); li.remove(); };
+          li.appendChild(x);
+          ul.insertBefore(li, b);
+          li.focus();
+        };
+        ul.appendChild(b);
+      }
+    });
+    // ④ task-item 삭제 버튼
+    document.querySelectorAll('.task-item').forEach(card=>{
+      if(!card.querySelector('.task-del-btn')){
+        const x = document.createElement('button');
+        x.className = 'task-del-btn'; x.textContent = '×'; x.title = '태스크 삭제';
+        x.onclick = e=>{ e.stopPropagation(); if(confirm('이 태스크를 삭제할까요?')) card.remove(); };
+        card.querySelector('.task-main').style.position = 'relative';
+        card.querySelector('.task-main').appendChild(x);
+      }
+    });
+    // ⑤ task-list마다 태스크 추가 버튼
     document.querySelectorAll('.task-list').forEach(list=>{
       if(!list.querySelector('.task-add-btn')){
-        const btn = document.createElement('button');
-        btn.className = 'task-add-btn';
-        btn.textContent = '＋ 태스크 추가';
-        btn.onclick = ()=> addTask(list);
-        list.appendChild(btn);
+        const b = document.createElement('button');
+        b.className = 'task-add-btn'; b.textContent = '＋ 태스크 추가';
+        b.onclick = ()=> addTask(list);
+        list.appendChild(b);
       }
     });
   } else {
+    // 편집 종료
     document.querySelectorAll('.task-text').forEach(el=>{ el.contentEditable = 'false'; });
+    document.querySelectorAll('.task-detail li').forEach(li=>{ li.contentEditable = 'false'; });
+    document.querySelectorAll('.li-del, .li-add').forEach(el=>el.remove());
   }
 }
 
@@ -874,7 +930,7 @@ function addTask(list){
       <button class="tog-btn" onclick="set(event,this,'prog')">진행</button>
       <button class="tog-btn" onclick="set(event,this,'done')">완료</button>
     </div>
-    <div class="task-detail"><ul><li>세부 내용을 입력하세요</li></ul></div>`;
+    <div class="task-detail"><ul><li contenteditable="true" spellcheck="false">세부 내용을 입력하세요</li></ul></div>`;
   list.insertBefore(div, list.querySelector('.task-add-btn'));
   applyState(div, 'todo');
   div.querySelector('.task-text').focus();
@@ -889,7 +945,10 @@ function saveAll(){
   document.querySelectorAll('.task-item').forEach(card=>{
     const id = card.dataset.id;
     const txt = card.querySelector('.task-text');
-    if(txt) texts[id] = txt.innerHTML;
+    if(txt) texts[id+'__title'] = txt.innerHTML;
+    // 세부 내용 li 저장
+    const lis = card.querySelectorAll('.task-detail li');
+    texts[id+'__detail'] = [...lis].map(li=>li.textContent.trim()).filter(Boolean);
   });
   localStorage.setItem(TXT_KEY, JSON.stringify(texts));
   // 피드백
@@ -910,11 +969,25 @@ function resetAll(){
 /* ── 텍스트 복원 ── */
 function restoreTexts(){
   const texts = JSON.parse(localStorage.getItem(TXT_KEY)||'{}');
-  Object.entries(texts).forEach(([id, html])=>{
-    const card = document.querySelector(`.task-item[data-id="${id}"]`);
-    if(card){
-      const txt = card.querySelector('.task-text');
-      if(txt) txt.innerHTML = html;
+  Object.entries(texts).forEach(([key, val])=>{
+    if(key.endsWith('__title')){
+      const id = key.replace('__title','');
+      const card = document.querySelector(`.task-item[data-id="${id}"]`);
+      if(card){ const txt=card.querySelector('.task-text'); if(txt) txt.innerHTML=val; }
+    } else if(key.endsWith('__detail')){
+      const id = key.replace('__detail','');
+      const card = document.querySelector(`.task-item[data-id="${id}"]`);
+      if(card && Array.isArray(val)){
+        const ul = card.querySelector('.task-detail ul');
+        if(ul){
+          ul.innerHTML = '';
+          val.forEach(t=>{ const li=document.createElement('li'); li.textContent=t; ul.appendChild(li); });
+        }
+      }
+    } else {
+      // 구버전 호환
+      const card = document.querySelector(`.task-item[data-id="${key}"]`);
+      if(card){ const txt=card.querySelector('.task-text'); if(txt) txt.innerHTML=val; }
     }
   });
 }
