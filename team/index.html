@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>인생푸드 마케팅브랜딩팀 — 팀 대시보드</title>
+<title>인생푸드 마케팅브랜딩팀 — 2026 팀 대시보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -282,7 +282,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
   <div class="header-inner">
     <div>
       <div class="eyebrow">인생푸드 · 마케팅브랜딩팀</div>
-      <h1 class="site-title"><em>팀</em> 대시보드</h1>
+      <h1 class="site-title"><em>2026</em> 팀 대시보드</h1>
       <div class="mission-pill" data-editable="1" id="header-mission">브랜드를 알리고, 가맹 유입을 만들고, 점주 매출을 받친다</div>
       <div class="header-meta">
         <span class="meta-chip">최찬솔</span>
@@ -809,7 +809,12 @@ const DEFAULT_GOALS = {
     {badge:'Track C · 브랜딩',badgeStyle:'background:var(--br);color:#fff',title:'4개 브랜드 현황 진단 + 메시지 체계 초안',pct:'0%',fill:'0%',fillColor:'var(--br)',sub:'인생아구찜·어화락 → 삼대미역·인생식탁 순서'},
     {badge:'Track D · 팀 구축',badgeStyle:'background:var(--green);color:#fff',title:'S1~S6 골조 수립 완료 (6개 항목)',pct:'0%',fill:'0%',fillColor:'var(--green)',sub:'Phase 1 완료 기준 = S1~S6 체크 완료 · 다음 분기 Phase 2 진입'},
   ],
-  3:[{badge:'3분기',badgeStyle:'background:var(--blue);color:#fff',title:'3분기 목표를 입력하세요',pct:'0%',fill:'0%',fillColor:'var(--blue)',sub:'진척 사항을 입력하세요'}],
+  3:[
+    {badge:'Track A · B2B',badgeStyle:'background:var(--b2b);color:#fff',title:'가맹 상담 건수 월별 추적 + CAC 집계 체계 구축',pct:'0%',fill:'0%',fillColor:'var(--b2b)',sub:'채널별 가맹 유입 비율 집계 · 상담→계약 전환율 추적 · 브이웍스 META+네이버 채널 CAC 비교 · 전사 짱돌 ★2(신규 가맹 계약 20건) 직결'},
+    {badge:'Track B · B2C',badgeStyle:'background:var(--b2c);color:#fff',title:'저장률·공유율·브랜드 검색량 MoM 집계 첫 사이클 완료',pct:'0%',fill:'0%',fillColor:'var(--b2c)',sub:'인스타 저장율·공유율 → 조회수 대체 KPI 전환 · 브랜드 검색량 MoM 추이 첫 집계 · 인플루언서 소재 성과 저장률 기준 재평가'},
+    {badge:'Track C · 브랜딩',badgeStyle:'background:var(--br);color:#fff',title:'3개 브랜드 메시지 프레임 완성 + 광고소재 검수 기준 적용',pct:'0%',fill:'0%',fillColor:'var(--br)',sub:'인생아구찜·삼대미역·어화락 각 브랜드 소비자·예비창업자·점주 대상 메시지 문서 3개 완성 · 완성된 메시지 체계 → 광고소재 검수 기준 연결'},
+    {badge:'Track D · 팀 구축',badgeStyle:'background:var(--green);color:#fff',title:'팀 Phase 2 진입 — 팀원 단독 채널 운영 1개 이상',pct:'0%',fill:'0%',fillColor:'var(--green)',sub:'심수민 채널 전략 초안 선제안 방식 전환 · 윤지수 요청 프로세스 독립 운영 · Chan 실행 비중 70% → 50% 이하 달성 · 대행사 재검토 기준 수립 + 1회차 재평가'}
+  ],
   4:[{badge:'4분기',badgeStyle:'background:var(--navy);color:#fff',title:'4분기 목표를 입력하세요',pct:'0%',fill:'0%',fillColor:'var(--navy)',sub:'진척 사항을 입력하세요'}]
 };
 
@@ -906,7 +911,7 @@ const ROLE_PHASES = {
    2. 변수 선언 (함수 실행 전 모두 초기화)
 ═══════════════════════════════════════ */
 let editOn      = false;
-let currentQ    = 2;
+let currentQ    = 3;
 let currentUser = null;
 let selectedCard = null;
 let perms       = {goals:'leader',notice:'leader',role:'leader',kpi:'leader'};
@@ -1305,11 +1310,15 @@ function markEditable(){
     let canEdit = false;
     if(!editOn){ canEdit = false; }
     else if(currentUser==='chan'){ canEdit = true; }
+    // 접속자 미선택 시에도 goal-badge · goal-title · goal-sub 편집 허용
+    else if(editOn && el.classList.contains('goal-badge')){ canEdit = true; }
+    else if(editOn && el.classList.contains('goal-title')){ canEdit = true; }
+    else if(editOn && el.classList.contains('goal-sub')){ canEdit = true; }
+    else if(editOn && el.classList.contains('goal-pct')){ canEdit = true; }
     else if(memberSection){
       canEdit = (memberSection.dataset.memberSection === currentUser);
     } else if(section && section.dataset.section==='shared'){
-      // check perms for this content type
-      canEdit = canEditSection('goals'); // default: shared editable only for leader
+      canEdit = canEditSection('goals');
     }
     el.setAttribute('contenteditable', canEdit ? 'true' : 'false');
     if(!canEdit && editOn) el.style.outline = 'none';
