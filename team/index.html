@@ -374,7 +374,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
       <div class="card" id="process-card" data-section="shared" style="margin-bottom:14px">
         <div class="card-head">
           <div class="card-icon" style="background:#F4F7FB">🔄</div>
-          <span class="card-title">캠페인 프로세스</span>
+          <span class="card-title" data-editable="1" id="card-title-process">캠페인 프로세스</span>
           <span style="font-size:11px;color:var(--ink-muted);margin-left:6px">B2B·B2C·PR 3트랙 병행</span>
           <a href="./process.html" target="_blank" id="proc-link-hint" style="margin-left:auto;font-size:11px;color:var(--b2b);font-weight:600;text-decoration:none">캠페인 프로세스 상세 보기 →</a>
         </div>
@@ -546,7 +546,7 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
       <div class="card" data-section="shared">
         <div class="card-head">
           <div class="card-icon" style="background:#FFF3E0">📢</div>
-          <span class="card-title">팀 공지사항</span>
+          <span class="card-title" data-editable="1" id="card-title-announce">팀 공지사항</span>
           <button class="card-action" onclick="addNotice()">+ 추가</button>
         </div>
         <div class="card-body">
@@ -580,13 +580,13 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
 
       <!-- KPI -->
       <div class="side-widget" data-section="shared">
-        <div class="sw-head"><span class="sw-icon">📊</span><span class="sw-title">이번 달 KPI</span></div>
+        <div class="sw-head"><span class="sw-icon">📊</span><span class="sw-title" data-editable="1" id="sw-title-kpi">이번 달 KPI</span></div>
         <div class="sw-body">
           <div class="kpi-grid">
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1">—</div><div class="kpi-sub" data-editable="1">이번 달 신규 건 · 목표: —건</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)">A · 광고 CAC</div><div class="kpi-val" data-editable="1">—</div><div class="kpi-sub" data-editable="1">상담 1건당 광고비 · 목표: —만원</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)">B · 브랜드 언급량</div><div class="kpi-val" data-editable="1">—</div><div class="kpi-sub" data-editable="1">소셜·검색·블로그 합산 · 베이스라인 수집 중</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)">B · 콘텐츠 저장율</div><div class="kpi-val" data-editable="1">—</div><div class="kpi-sub" data-editable="1">인스타 최근 집행 기준</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-1">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1" id="kpi-val-1">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-1">이번 달 신규 건 · 목표: —건</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-2">A · 광고 CAC</div><div class="kpi-val" data-editable="1" id="kpi-val-2">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-2">상담 1건당 광고비 · 목표: —만원</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-3">B · 브랜드 언급량</div><div class="kpi-val" data-editable="1" id="kpi-val-3">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-3">소셜·검색·블로그 합산 · 베이스라인 수집 중</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-4">B · 콘텐츠 저장율</div><div class="kpi-val" data-editable="1" id="kpi-val-4">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-4">인스타 최근 집행 기준</div></div>
           </div>
         </div>
       </div>
@@ -637,11 +637,11 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
 
       <!-- TEAM PRINCIPLES -->
       <div class="side-widget" data-section="shared">
-        <div class="sw-head"><span class="sw-icon">⚡</span><span class="sw-title">팀 핵심 원칙</span></div>
+        <div class="sw-head"><span class="sw-icon">⚡</span><span class="sw-title" data-editable="1" id="sw-title-principle">팀 핵심 원칙</span></div>
         <div class="sw-body" style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span style="font-size:13px" data-editable="1">기준을 먼저 만들고 실행을 넘긴다</span></div>
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span style="font-size:13px" data-editable="1">팀원이 실패할 공간을 허용한다 (작은 실패가 체화됨)</span></div>
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span style="font-size:13px" data-editable="1">같은 질문이 2번 오면 문서로 만든다</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span style="font-size:13px" data-editable="1" id="principle-1">기준을 먼저 만들고 실행을 넘긴다</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span style="font-size:13px" data-editable="1" id="principle-2">팀원이 실패할 공간을 허용한다 (작은 실패가 체화됨)</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span style="font-size:13px" data-editable="1" id="principle-3">같은 질문이 2번 오면 문서로 만든다</span></div>
         </div>
       </div>
 
