@@ -215,6 +215,7 @@ body.edit-mode .section-locked [contenteditable]{contenteditable:false!important
 
 /* ── EDIT BAR ── */
 #edit-bar{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+#eb-export-btn{display:flex!important}
 .eb-btn{display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:40px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font-b);box-shadow:0 2px 16px rgba(0,0,0,.18);transition:all .15s;white-space:nowrap}
 .eb-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.25)}
 .eb-edit{background:#16141A;color:#fff}
@@ -705,6 +706,7 @@ body.edit-mode .principle-add{display:block}
 <div class="edit-hint" id="edit-hint">✏️ 편집 중</div>
 
 <div id="edit-bar">
+  <button class="eb-btn" id="eb-export-btn" onclick="exportHTML()" style="background:#1A3E6F;color:#fff">⬇ HTML 내보내기</button>
   <button class="eb-btn eb-settings" id="eb-settings-btn" onclick="openSettings()">⚙️ 연동 설정</button>
   <button class="eb-btn eb-save" id="eb-save-btn" onclick="saveAll()">✅ 저장</button>
   <button class="eb-btn eb-edit" id="eb-edit-btn" onclick="toggleEdit()">✏️ 편집 모드</button>
@@ -1300,6 +1302,7 @@ function addPrinciple(){
 }
 
 function renumberPrinciples(){
+  if(!document.getElementById('principle-list')) return;
   document.querySelectorAll('#principle-list .principle-num').forEach((el,i)=>{
     el.textContent = String(i+1).padStart(2,'0');
   });
@@ -1473,6 +1476,53 @@ function toggleEdit(){
   document.getElementById('eb-settings-btn').style.display = editOn?'flex':'none';
   markEditable();
   applyPermissionMasks();
+}
+
+
+/* ═══════════════════════════════════════
+   HTML 내보내기
+═══════════════════════════════════════ */
+function exportHTML(){
+  // 1. 먼저 저장
+  saveAll();
+
+  // 2. 현재 DOM 스냅샷
+  const clone = document.documentElement.cloneNode(true);
+
+  // 편집 UI 제거
+  ['#edit-bar','#notice-badge-picker','#badge-color-picker','#save-toast'].forEach(sel=>{
+    clone.querySelectorAll(sel).forEach(el=>el.remove());
+  });
+  // fixed 토스트/배너 제거
+  clone.querySelectorAll('body > div[style*="fixed"], body > div[style*="position:fixed"]').forEach(el=>el.remove());
+  // contenteditable 제거
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  // 편집 전용 버튼 제거
+  clone.querySelectorAll('.notice-del,.principle-del,.principle-add,.goal-del,.work-del,.notice-add,.work-add').forEach(el=>el.remove());
+  // edit-mode 클래스 제거
+  clone.querySelector('body')?.classList.remove('edit-mode');
+  // 인라인 outline 스타일 제거
+  clone.querySelectorAll('[style*="dashed"]').forEach(el=>{ el.style.outline=''; });
+
+  // 3. 현재 렌더링된 goals/work 내용을 DEFAULT_GOALS/workData에 반영한 스크립트로 교체
+  // → goalsData / workData를 현재 상태로 고정
+  const snapshot = document.createElement('script');
+  snapshot.textContent = `
+    // 내보내기 시점 데이터 스냅샷
+    window._EXPORT_GOALS = ${JSON.stringify(goalsData)};
+    window._EXPORT_WORK  = ${JSON.stringify(workData)};
+  `;
+  clone.head.appendChild(snapshot);
+
+  const out = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([out], {type:'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '인생푸드_팀대시보드_' + new Date().toLocaleDateString('ko',{month:'2-digit',day:'2-digit'}).replace(/\./g,'').replace(/ /g,'') + '.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+  // 피드백
+  showSaveToast('⬇ 다운로드 완료');
 }
 
 function autoSaveOnExit(){
