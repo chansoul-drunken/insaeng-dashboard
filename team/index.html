@@ -1315,6 +1315,8 @@ function canEditSection(section){
 ═══════════════════════════════════════ */
 function toggleEdit(){
   if(!currentUser){ openAuthModal(); return; }
+  // 편집 종료 시 자동 저장
+  if(editOn) autoSaveOnExit();
   editOn = !editOn;
   document.body.classList.toggle('edit-mode', editOn);
   const btn = document.getElementById('eb-edit-btn');
@@ -1324,6 +1326,28 @@ function toggleEdit(){
   document.getElementById('eb-settings-btn').style.display = editOn?'flex':'none';
   markEditable();
   applyPermissionMasks();
+}
+
+function autoSaveOnExit(){
+  try{
+    saveAll();
+    // 토스트 알림
+    showSaveToast('💾 자동 저장 완료');
+  } catch(e){ console.warn('자동저장 실패:', e); }
+}
+
+function showSaveToast(msg){
+  let t = document.getElementById('save-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'save-toast';
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#0A5C47;color:#fff;font-size:13px;font-weight:600;padding:8px 20px;border-radius:20px;z-index:99999;font-family:var(--font-body,"Noto Sans KR",sans-serif);box-shadow:0 4px 16px rgba(0,0,0,.2);transition:opacity .3s;pointer-events:none';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(()=>{ t.style.opacity = '0'; }, 2000);
 }
 
 function markEditable(){
