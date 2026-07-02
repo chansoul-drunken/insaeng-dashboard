@@ -298,6 +298,53 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
   background:none;padding:0
 }
 .bcp-custom span{font-size:11px;color:#8A9BB8}
+
+/* ── 핵심 원칙 편집 ── */
+.principle-del{
+  display:none;width:16px;height:16px;border-radius:50%;
+  background:#F0C0C0;border:none;cursor:pointer;font-size:9px;
+  color:#8B1A1A;align-items:center;justify-content:center;
+  flex-shrink:0;padding:0;line-height:1;
+}
+body.edit-mode .principle-del{display:flex}
+.principle-add{
+  display:none;width:100%;padding:6px;border:1.5px dashed var(--rule);
+  border-radius:8px;background:transparent;cursor:pointer;
+  font-size:12px;color:var(--ink-muted);font-family:var(--font-b);
+  margin-top:2px;transition:all .15s;
+}
+.principle-add:hover{border-color:var(--gold);color:var(--gold)}
+body.edit-mode .principle-add{display:block}
+
+/* ── 공지 뱃지 피커 ── */
+#notice-badge-picker{
+  position:fixed;z-index:99999;
+  background:#1A1E2A;border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:10px 12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  display:none;flex-direction:column;gap:8px;min-width:220px;
+}
+#notice-badge-picker.show{display:flex}
+.nbp-label{font-size:10px;font-weight:700;letter-spacing:.08em;color:#8A9BB8;text-transform:uppercase}
+.nbp-presets{display:flex;flex-wrap:wrap;gap:5px}
+.nbp-preset{
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;
+  cursor:pointer;border:1.5px solid transparent;transition:all .12s;
+}
+.nbp-preset:hover{border-color:rgba(255,255,255,.3);transform:scale(1.05)}
+.nbp-text-row{display:flex;gap:6px;align-items:center;margin-top:2px}
+.nbp-text-input{
+  flex:1;font-size:12px;padding:4px 8px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);
+  color:#fff;font-family:var(--font-b);outline:none;
+}
+.nbp-text-input::placeholder{color:#6A7FA0}
+.nbp-apply{
+  font-size:11px;padding:4px 10px;border-radius:6px;
+  background:var(--gold);color:#1A1E2A;border:none;cursor:pointer;
+  font-weight:700;font-family:var(--font-b);
+}
+
 </style>
 </head>
 <body>
@@ -638,10 +685,11 @@ body.edit-mode [data-editable]:focus{outline:1.5px solid var(--gold)!important;b
       <!-- TEAM PRINCIPLES -->
       <div class="side-widget" data-section="shared">
         <div class="sw-head"><span class="sw-icon">⚡</span><span class="sw-title" data-editable="1" id="sw-title-principle">팀 핵심 원칙</span></div>
-        <div class="sw-body" style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span style="font-size:13px" data-editable="1" id="principle-1">기준을 먼저 만들고 실행을 넘긴다</span></div>
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span style="font-size:13px" data-editable="1" id="principle-2">팀원이 실패할 공간을 허용한다 (작은 실패가 체화됨)</span></div>
-          <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span style="font-size:13px" data-editable="1" id="principle-3">같은 질문이 2번 오면 문서로 만든다</span></div>
+        <div class="sw-body" id="principle-list" style="display:flex;flex-direction:column;gap:10px">
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-1">기준을 먼저 만들고 실행을 넘긴다</span><button class="principle-del">×</button></div>
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-2">팀원이 실패할 공간을 허용한다 (작은 실패가 체화됨)</span><button class="principle-del">×</button></div>
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-3">같은 질문이 2번 오면 문서로 만든다</span><button class="principle-del">×</button></div>
+          <button class="principle-add" onclick="addPrinciple()">＋ 원칙 추가</button>
         </div>
       </div>
 
@@ -1223,14 +1271,113 @@ function addNotice(){
   div.innerHTML = `
     <div class="notice-pin">📌</div>
     <div class="notice-body">
-      <div class="notice-text" data-editable="1">공지 내용을 입력하세요</div>
+      <div class="notice-text" data-editable="1"><span class="notice-tag" style="background:var(--chan-pale);color:var(--chan)">중요</span>공지 내용을 입력하세요</div>
       <div class="notice-date" data-editable="1">${today}</div>
     </div>
     <button class="notice-del" onclick="this.closest('.notice-item').remove()">×</button>`;
   list.prepend(div);
   if(editOn) markEditable();
+  // 뱃지 피커 자동 열기
+  const tag = div.querySelector('.notice-tag');
+  if(tag) openNoticeBadgePicker(tag);
   div.querySelector('.notice-text').focus();
 }
+
+/* ── 핵심 원칙 추가 ── */
+let principleCount = 3;
+function addPrinciple(){
+  principleCount++;
+  const list = document.getElementById('principle-list');
+  const addBtn = list.querySelector('.principle-add');
+  const div = document.createElement('div');
+  div.className = 'principle-item';
+  div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;position:relative';
+  const num = String(principleCount).padStart(2,'0');
+  div.innerHTML = `<span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">${num}</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" contenteditable="true" spellcheck="false">원칙을 입력하세요</span><button class="principle-del">×</button>`;
+  div.querySelector('.principle-del').onclick = ()=>{ div.remove(); renumberPrinciples(); };
+  list.insertBefore(div, addBtn);
+  div.querySelector('.principle-text').focus();
+}
+
+function renumberPrinciples(){
+  document.querySelectorAll('#principle-list .principle-num').forEach((el,i)=>{
+    el.textContent = String(i+1).padStart(2,'0');
+  });
+  principleCount = document.querySelectorAll('#principle-list .principle-item').length;
+}
+
+/* ── 공지 뱃지 피커 ── */
+const NOTICE_BADGE_PRESETS = [
+  {label:'중요', bg:'var(--chan-pale)', color:'var(--chan)'},
+  {label:'공유', bg:'var(--blue-pale)', color:'var(--blue)'},
+  {label:'긴급', bg:'#FBE8E8', color:'#A32020'},
+  {label:'완료', bg:'var(--p1-pale)', color:'var(--p1)'},
+  {label:'업무', bg:'var(--surface-alt)', color:'var(--ink-mid)'},
+  {label:'공지', bg:'var(--p3-pale)', color:'var(--p3)'},
+];
+let _nbpTarget = null;
+
+function initNoticeBadgePicker(){
+  const picker = document.createElement('div');
+  picker.id = 'notice-badge-picker';
+  picker.innerHTML = `
+    <div class="nbp-label">뱃지 선택</div>
+    <div class="nbp-presets" id="nbp-presets"></div>
+    <div class="nbp-label" style="margin-top:4px">직접 입력</div>
+    <div class="nbp-text-row">
+      <input class="nbp-text-input" id="nbp-text" placeholder="뱃지 텍스트">
+      <button class="nbp-apply" onclick="applyNoticeBadgeText()">적용</button>
+    </div>`;
+  document.body.appendChild(picker);
+
+  const container = picker.querySelector('#nbp-presets');
+  NOTICE_BADGE_PRESETS.forEach(p=>{
+    const btn = document.createElement('button');
+    btn.className = 'nbp-preset';
+    btn.textContent = p.label;
+    btn.style.background = p.bg; btn.style.color = p.color;
+    btn.onclick = ()=>{
+      if(!_nbpTarget) return;
+      _nbpTarget.style.background = p.bg;
+      _nbpTarget.style.color = p.color;
+      _nbpTarget.textContent = p.label;
+      picker.classList.remove('show');
+    };
+    container.appendChild(btn);
+  });
+
+  // 바깥 클릭 시 닫기
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('#notice-badge-picker') && !e.target.classList.contains('notice-tag')){
+      picker.classList.remove('show');
+    }
+  });
+}
+
+function applyNoticeBadgeText(){
+  const txt = document.getElementById('nbp-text').value.trim();
+  if(!txt || !_nbpTarget) return;
+  _nbpTarget.textContent = txt;
+  document.getElementById('notice-badge-picker').classList.remove('show');
+}
+
+function openNoticeBadgePicker(tagEl){
+  let picker = document.getElementById('notice-badge-picker');
+  if(!picker){ initNoticeBadgePicker(); picker = document.getElementById('notice-badge-picker'); }
+  _nbpTarget = tagEl;
+  document.getElementById('nbp-text').value = tagEl.textContent || '';
+  const rect = tagEl.getBoundingClientRect();
+  picker.style.top  = (rect.bottom + 6 + window.scrollY) + 'px';
+  picker.style.left = Math.min(rect.left, window.innerWidth - 240) + 'px';
+  picker.classList.add('show');
+}
+
+// 편집 모드에서 notice-tag 클릭 시 피커 열기
+document.addEventListener('click', e=>{
+  if(!editOn) return;
+  const tag = e.target.closest('.notice-tag');
+  if(tag){ e.stopPropagation(); openNoticeBadgePicker(tag); }
+});
 
 /* ═══════════════════════════════════════
    AUTH / IDENTITY
@@ -1424,6 +1571,13 @@ function saveAll(){
   });
 
   const data = { textSnap, goalsData, workData, perms, savedAt:new Date().toISOString() };
+  // 핵심 원칙 저장
+  const principles = [];
+  document.querySelectorAll('#principle-list .principle-item').forEach(item=>{
+    principles.push(item.querySelector('.principle-text')?.textContent.trim()||'');
+  });
+  data.principles = principles;
+
   localStorage.setItem(SAVE_KEY, JSON.stringify(data));
 
   // Firebase 동기화
@@ -1455,6 +1609,25 @@ function loadSavedState(){
       });
     }
     if(data.perms) perms = data.perms;
+    // 핵심 원칙 복원
+    if(data.principles && Array.isArray(data.principles)){
+      const list = document.getElementById('principle-list');
+      if(list){
+        // 기존 항목 제거 후 재생성
+        list.querySelectorAll('.principle-item').forEach(el=>el.remove());
+        const addBtn = list.querySelector('.principle-add');
+        data.principles.forEach((txt,i)=>{
+          const div = document.createElement('div');
+          div.className = 'principle-item';
+          div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;position:relative';
+          const num = String(i+1).padStart(2,'0');
+          div.innerHTML = `<span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">${num}</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-${i+1}">${txt}</span><button class="principle-del">×</button>`;
+          div.querySelector('.principle-del').onclick = ()=>{ div.remove(); renumberPrinciples(); };
+          list.insertBefore(div, addBtn||null);
+        });
+        principleCount = data.principles.length;
+      }
+    }
   }catch(e){ console.warn('restore error',e); }
 }
 
