@@ -248,6 +248,12 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
 .outcome-notes-input:focus { outline: none; border-color: var(--text); }
 .month-col-head { text-align: center !important; min-width: 90px; }
 
+/* Brand selector */
+.brand-tab { display:flex; align-items:center; gap:6px; padding:5px 10px; border-radius:6px; font-size:12px; color:var(--text2); cursor:pointer; border:1.5px solid transparent; background:none; width:100%; text-align:left; transition:background .15s; font-family:var(--sans); }
+.brand-tab:hover { background:var(--surface2); }
+.brand-tab.active { background:#fff; border-color:var(--border2); color:var(--text); font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+.brand-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
 /* Toast */
 #saveToast { position:fixed; bottom:24px; right:24px; padding:10px 18px; border-radius:10px; color:#fff; font-size:13px; font-weight:600; z-index:999; opacity:0; transition:opacity .3s; pointer-events:none; }
 
@@ -264,6 +270,16 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
     <div>
       <div class="logo">인생푸드<br><span>SNS 광고 대시보드</span></div>
     </div>
+    <div>
+      <div class="sidebar-section" style="margin-bottom:4px">브랜드</div>
+      <div id="brandSelector" style="display:flex;flex-direction:column;gap:2px">
+        <button class="brand-tab active" data-brand="all" onclick="switchBrand('all')"><span class="brand-dot" style="background:#1a1917"></span>인생푸드 전체</button>
+        <button class="brand-tab" data-brand="aguchim" onclick="switchBrand('aguchim')"><span class="brand-dot" style="background:#cc0000"></span>인생아구찜</button>
+        <button class="brand-tab" data-brand="samdi" onclick="switchBrand('samdi')"><span class="brand-dot" style="background:#03c75a"></span>삼대미역</button>
+        <button class="brand-tab" data-brand="uhwalock" onclick="switchBrand('uhwalock')"><span class="brand-dot" style="background:#f5a623"></span>어화락</button>
+      </div>
+    </div>
+
     <nav class="nav">
       <div class="sidebar-section">메뉴</div>
       <button class="nav-item active" onclick="showPage('dashboard', this)">
@@ -444,6 +460,7 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
         각 셀에 직접 입력하세요. 비어 있으면 자동으로 공란 처리됩니다. 지표는 추가·삭제할 수 있습니다.
       </div>
 
+      <div id="outcomeBrandNote" style="display:none;padding:10px 14px;background:#dbeafe;color:#1e3a8a;border-radius:8px;font-size:12px;margin-bottom:12px;line-height:1.6"></div>
       <div style="overflow-x:auto">
         <table class="outcomes-table" id="outcomesTable">
           <!-- JS로 렌더 -->
@@ -688,6 +705,44 @@ const BUILT_IN_PLATFORMS = {
 
 let PLATFORMS = { ...BUILT_IN_PLATFORMS };
 
+// ── 브랜드 정의 ─────────────────────────────────────────
+const BRANDS = {
+  all:      { label: '인생푸드 전체', short: '전체',    color: '#1a1917' },
+  aguchim:  { label: '인생아구찜',   short: '아구찜',   color: '#cc0000' },
+  samdi:    { label: '삼대미역',     short: '삼대미역', color: '#03c75a' },
+  uhwalock: { label: '어화락',       short: '어화락',   color: '#f5a623' },
+};
+let activeBrand = 'all';
+// 브랜드별 연간예산 (원)
+let brandBudgets = { aguchim: 240000000, samdi: 0, uhwalock: 0 };
+
+function switchBrand(key) {
+  activeBrand = key;
+  document.querySelectorAll('.brand-tab').forEach(b => b.classList.toggle('active', b.dataset.brand === key));
+  // 예산 입력 업데이트
+  const budget = key === 'all'
+    ? Object.values(brandBudgets).reduce((s,v) => s+v, 0)
+    : (brandBudgets[key] || 0);
+  const inp = document.getElementById('annualBudgetInput');
+  if (inp) {
+    inp.value = budget > 0 ? budget.toLocaleString('ko-KR') : '';
+    inp.readOnly = (key === 'all');
+    inp.style.opacity = key === 'all' ? '.6' : '1';
+    inp.title = key === 'all' ? '브랜드별 예산의 합계입니다' : '';
+  }
+  annualBudget = budget;
+  // 페이지 서브타이틀 업데이트
+  document.querySelectorAll('.page-sub').forEach(el => {
+    el.textContent = '2026년 ' + BRANDS[key].label + ' 인플루언서 광고 예산 및 성과 현황';
+  });
+  renderAll();
+}
+
+function brandFilterCreators(creators) {
+  if (activeBrand === 'all') return creators;
+  return creators.filter(c => (c.brand || 'aguchim') === activeBrand);
+}
+
 // 커스텀 플랫폼 로드
 function loadCustomPlatforms() {
   try {
@@ -778,8 +833,8 @@ let annualBudget = 240000000;
 
 // ── 유틸 ──────────────────────────────────────────────────
 function fmtWon(n) { return n.toLocaleString('ko-KR') + '원'; }
-function totalBudget() { return data.months.reduce((s,m) => s + m.creators.reduce((ss,c) => ss+c.budget,0),0); }
-function totalViews() { return data.months.reduce((s,m) => s + m.creators.reduce((ss,c) => ss+c.links.reduce((sss,l)=>sss+(l.views||0),0),0),0); }
+function totalBudget() { return data.months.reduce((s,m) => s + brandFilterCreators(m.creators).reduce((ss,c) => ss+c.budget,0),0); }
+function totalViews() { return data.months.reduce((s,m) => s + brandFilterCreators(m.creators).reduce((ss,c) => ss+c.links.reduce((sss,l)=>sss+(l.views||0),0),0),0); }
 function creatorViews(c) { return c.links.reduce((s,l)=>s+(l.views||0),0); }
 
 function showSaveToast(msg, color='#16a34a') {
@@ -791,7 +846,7 @@ function showSaveToast(msg, color='#16a34a') {
 // Platform aggregation
 function getPlatformStats() {
   const stats = {};
-  data.months.forEach(m => m.creators.forEach(c => c.links.forEach(l => {
+  data.months.forEach(m => brandFilterCreators(m.creators).forEach(c => c.links.forEach(l => {
     if (!stats[l.platform]) stats[l.platform] = { views: 0, count: 0, budget: 0 };
     stats[l.platform].views += (l.views || 0);
     stats[l.platform].count++;
@@ -828,7 +883,8 @@ function renderBudgetTracker() {
   bar.style.width = Math.min(pct,100).toFixed(1)+'%';
   bar.className = 'progress-fill '+(pct>=100?'p-over':pct>=80?'p-warn':'p-safe');
   document.getElementById('btMonthBars').innerHTML = total > 0 ? data.months.map(m => {
-    const mb = m.creators.reduce((s,c)=>s+c.budget,0);
+    const mb = brandFilterCreators(m.creators).reduce((s,c)=>s+c.budget,0);
+    if (mb === 0) return '';
     const mp = (mb/total*100).toFixed(1);
     return `<div class="mbar-row"><div class="mbar-label">${m.name}</div><div class="mbar-track"><div class="mbar-fill" style="width:${Math.min(mp,100)}%;background:${m.color}"></div></div><div class="mbar-val">${fmtWon(mb)} (${mp}%)</div></div>`;
   }).join('') : '';
@@ -836,14 +892,16 @@ function renderBudgetTracker() {
 
 function renderMonthSummary() {
   document.getElementById('monthSummaryCards').innerHTML = data.months.map(m => {
-    const budget = m.creators.reduce((s,c)=>s+c.budget,0);
-    const views = m.creators.reduce((s,c)=>s+creatorViews(c),0);
+    const fc = brandFilterCreators(m.creators);
+    if (fc.length === 0) return '';
+    const budget = fc.reduce((s,c)=>s+c.budget,0);
+    const views = fc.reduce((s,c)=>s+creatorViews(c),0);
     const cpv = views > 0 ? (budget/views).toFixed(2) : '-';
     return `<div class="month-block">
       <div class="month-head-div" onclick="toggleMonth('ms${m.id}','mchev${m.id}')">
         <div class="month-head-left">
           <div class="month-color" style="background:${m.color}"></div>
-          <div><div class="month-name">${m.name}</div><div class="month-meta">크리에이터 ${m.creators.length}명</div></div>
+          <div><div class="month-name">${m.name}</div><div class="month-meta">크리에이터 ${fc.length}명</div></div>
         </div>
         <div class="month-head-right">
           <div class="month-stat"><div class="month-stat-val">${fmtWon(budget)}</div><div class="month-stat-lbl">예산</div></div>
@@ -858,8 +916,11 @@ function renderMonthSummary() {
       <div class="month-body" id="ms${m.id}">
         <table class="creator-table">
           <tr><td class="col-head" style="width:140px">크리에이터</td><td class="col-head" style="width:160px">예산</td><td class="col-head">조회수</td><td class="col-head">링크</td></tr>
-          ${m.creators.map(c=>`<tr>
-            <td><div class="creator-name">${c.name}</div></td>
+          ${fc.map(c=>`<tr>
+            <td>
+              <div class="creator-name">${c.name}</div>
+              ${activeBrand==='all'?`<div style="font-size:10px;margin-top:2px;color:var(--text3)">${BRANDS[c.brand||'aguchim']?.label||''}</div>`:''}
+            </td>
             <td><div class="budget-display mono">${fmtWon(c.budget)}</div></td>
             <td><div class="views-grid">${c.links.map(l=>`<div class="view-row">${platBadgeHTML(l.platform)}<span class="view-result mono">${l.views>0?l.views.toLocaleString('ko-KR')+'회':'-'}</span></div>`).join('')}</div></td>
             <td><div class="links-wrap">${c.links.map(l=>linkChipHTML(l)).join('')}</div></td>
@@ -872,13 +933,15 @@ function renderMonthSummary() {
 
 function renderMonthDetail() {
   document.getElementById('monthDetailBlocks').innerHTML = data.months.map(m => {
-    const budget = m.creators.reduce((s,c)=>s+c.budget,0);
-    const views = m.creators.reduce((s,c)=>s+creatorViews(c),0);
+    const fc = brandFilterCreators(m.creators);
+    if (fc.length === 0 && activeBrand !== 'all') return '';
+    const budget = fc.reduce((s,c)=>s+c.budget,0);
+    const views = fc.reduce((s,c)=>s+creatorViews(c),0);
     return `<div class="month-block">
       <div class="month-head-div" onclick="toggleMonth('md${m.id}','mdchev${m.id}')">
         <div class="month-head-left">
           <div class="month-color" style="background:${m.color}"></div>
-          <div><div class="month-name">${m.name}</div><div class="month-meta">크리에이터 ${m.creators.length}명 · ${fmtWon(budget)}</div></div>
+          <div><div class="month-name">${m.name}</div><div class="month-meta">크리에이터 ${fc.length}명 · ${fmtWon(budget)}</div></div>
         </div>
         <div class="month-head-right">
           <div class="month-stat"><div class="month-stat-val">${views>0?views.toLocaleString('ko-KR')+'회':'미입력'}</div><div class="month-stat-lbl">총 조회수</div></div>
@@ -899,8 +962,11 @@ function renderMonthDetail() {
             <td class="col-head">링크</td>
             <td class="col-head" style="width:90px;text-align:center">관리</td>
           </tr>
-          ${m.creators.map((c,ci)=>`<tr>
-            <td><div class="creator-name">${c.name}</div></td>
+          ${fc.map((c,ci)=>`<tr>
+            <td>
+              <div class="creator-name">${c.name}</div>
+              ${activeBrand==='all'?`<div style="font-size:10px;color:var(--text3)">${BRANDS[c.brand||'aguchim']?.label||''}</div>`:''}
+            </td>
             <td>
               <div style="display:flex;flex-direction:column;gap:4px">
                 <div class="budget-display mono" id="bdisplay_${m.id}_${ci}">${fmtWon(c.budget)}</div>
@@ -932,14 +998,14 @@ function renderPerformance() {
   const cpv = views>0?(budget/views).toFixed(2):'-';
   const cpm = views>0?Math.round(budget/(views/10000)).toLocaleString('ko-KR')+'원':'-';
   let allCreators = [];
-  data.months.forEach(m => m.creators.forEach(c => {
+  data.months.forEach(m => brandFilterCreators(m.creators).forEach(c => {
     const v = creatorViews(c);
     allCreators.push({ name:c.name, month:m.name, budget:c.budget, views:v, cpv:v>0?c.budget/v:Infinity });
   }));
   allCreators.sort((a,b)=>a.cpv-b.cpv);
   const bestCreator = allCreators.find(c=>c.views>0);
   let bestMonth = '-', bestV = 0;
-  data.months.forEach(m => { const v=m.creators.reduce((s,c)=>s+creatorViews(c),0); if(v>bestV){bestV=v;bestMonth=m.name;} });
+  data.months.forEach(m => { const v=brandFilterCreators(m.creators).reduce((s,c)=>s+creatorViews(c),0); if(v>bestV){bestV=v;bestMonth=m.name;} });
 
   document.getElementById('perfMetrics').innerHTML = `
     <div class="metric-card"><div class="metric-label">평균 CPV</div><div class="metric-value" style="font-size:16px">${views>0?'₩'+cpv:'-'}</div><div class="metric-sub">조회 1회당 비용</div></div>
@@ -1104,6 +1170,7 @@ function saveBudget(monthId, ci, val) {
 }
 function onBudgetInput(val) {
   annualBudget = parseInt(val.replace(/[^0-9]/g,''))||0;
+  if (activeBrand !== 'all') brandBudgets[activeBrand] = annualBudget;
   renderBudgetTracker();
 }
 
@@ -1252,6 +1319,14 @@ function openAddCreatorToMonth(monthId) {
       <div class="form-group"><label class="form-label">이름</label><input class="form-input" id="acName" placeholder="크리에이터 이름"></div>
       <div class="form-group"><label class="form-label">예산 (원)</label><input class="form-input" id="acBudget" type="number" placeholder="5000000"></div>
     </div>
+    <div class="form-group" style="margin-bottom:12px">
+      <label class="form-label">브랜드</label>
+      <select class="form-input" id="acBrand">
+        <option value="aguchim" ${activeBrand==='aguchim'||activeBrand==='all'?'selected':''}>인생아구찜</option>
+        <option value="samdi" ${activeBrand==='samdi'?'selected':''}>삼대미역</option>
+        <option value="uhwalock" ${activeBrand==='uhwalock'?'selected':''}>어화락</option>
+      </select>
+    </div>
     <div style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
       <span style="font-size:12px;font-weight:700;color:var(--text2)">링크</span>
       <button class="btn btn-small btn-edit" onclick="addAcLinkRow()">+ 링크 추가</button>
@@ -1283,7 +1358,9 @@ function saveAddCreator() {
     const views=parseInt(row.querySelector('.el-views').value)||0;
     if(url) links.push({platform,label:platformLabel(platform,url),url,views});
   });
-  m.creators.push({id:'c_'+Date.now(),name,budget,links});
+  const acBrandEl = document.getElementById('acBrand');
+  const brand = acBrandEl ? acBrandEl.value : (activeBrand==='all'?'aguchim':activeBrand);
+  m.creators.push({id:'c_'+Date.now(),name,budget,brand,links});
   closeAddCreator(); renderAll(); showSaveToast(name+' 추가됨','#16a34a');
 }
 function closeAddCreator() { document.getElementById('addCreatorModal').classList.remove('open'); }
@@ -1390,6 +1467,7 @@ async function pullFromCloud(silent) {
     const incoming=result.data||result;
     if(incoming.months) Object.assign(data,{months:incoming.months});
     if(incoming.annualBudget) annualBudget=incoming.annualBudget;
+    if(incoming.brandBudgets) Object.assign(brandBudgets,incoming.brandBudgets);
     if(incoming.mediaStrategy) Object.assign(mediaStrategy,incoming.mediaStrategy);
     if(incoming.outcomes) Object.assign(outcomes,incoming.outcomes);
     if(incoming.customMetrics) customMetrics=incoming.customMetrics;
@@ -1402,7 +1480,7 @@ async function pullFromCloud(silent) {
 function startAutoSync(){if(syncTimer)clearInterval(syncTimer);if(!GAS_URL||syncIntervalSec<=0)return;syncTimer=setInterval(()=>pullFromCloud(true),syncIntervalSec*1000);}
 function manualSave(){
   try {
-    const saveData={data,annualBudget,mediaStrategy,outcomes,customMetrics,savedAt:new Date().toISOString()};
+    const saveData={data,annualBudget,brandBudgets,mediaStrategy,outcomes,customMetrics,savedAt:new Date().toISOString()};
     localStorage.setItem('insaeng_dashboard_save',JSON.stringify(saveData));
     const t=new Date().toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
     document.getElementById('lastUpdated').textContent=t;
@@ -1413,7 +1491,7 @@ function manualSave(){
 function loadSavedData(){
   try {
     const raw=localStorage.getItem('insaeng_dashboard_save');
-    if(raw){const saved=JSON.parse(raw);if(saved.data)Object.assign(data,saved.data);if(saved.annualBudget)annualBudget=saved.annualBudget;if(saved.mediaStrategy)Object.assign(mediaStrategy,saved.mediaStrategy);if(saved.outcomes)Object.assign(outcomes,saved.outcomes);if(saved.customMetrics)customMetrics=saved.customMetrics;}
+    if(raw){const saved=JSON.parse(raw);if(saved.data)Object.assign(data,saved.data);if(saved.annualBudget)annualBudget=saved.annualBudget;if(saved.brandBudgets)Object.assign(brandBudgets,saved.brandBudgets);if(saved.mediaStrategy)Object.assign(mediaStrategy,saved.mediaStrategy);if(saved.outcomes)Object.assign(outcomes,saved.outcomes);if(saved.customMetrics)customMetrics=saved.customMetrics;}
     if(GAS_URL){setSyncStatus('syncing','구글시트 로딩 중...');pullFromCloud(false);}
     else {setSyncStatus('none','구글시트 미연결');}
   } catch(e){}
@@ -1460,7 +1538,8 @@ const PRESET_METRICS = [
   { id:'web_visit',  group:'채널·팔로워', label:'웹사이트 유입',    unit:'명',  icon:'🌐', hint:'월간 방문자 수' },
 ];
 
-// outcomes: { [monthId]: { [metricId]: value (string) } }
+// outcomes: { [brandKey]: { [monthId]: { [metricId]: value } } }
+// 전체 뷰(all)에서는 브랜드별로 구분해서 입력
 let outcomes = {};
 
 // 커스텀 지표 목록
@@ -1475,18 +1554,30 @@ function getActiveMetrics() {
   return sorted;
 }
 
-function getOutcomeVal(monthId, metricId) {
-  return (outcomes[monthId] && outcomes[monthId][metricId] != null) ? outcomes[monthId][metricId] : '';
+function getOutcomeVal(monthId, metricId, brandKey) {
+  const bk = brandKey || (activeBrand === 'all' ? 'aguchim' : activeBrand);
+  const bo = outcomes[bk] || {};
+  return (bo[monthId] && bo[monthId][metricId] != null) ? bo[monthId][metricId] : '';
 }
-function setOutcomeVal(monthId, metricId, val) {
-  if (!outcomes[monthId]) outcomes[monthId] = {};
-  outcomes[monthId][metricId] = val;
+function setOutcomeVal(monthId, metricId, val, brandKey) {
+  const bk = brandKey || (activeBrand === 'all' ? 'aguchim' : activeBrand);
+  if (!outcomes[bk]) outcomes[bk] = {};
+  if (!outcomes[bk][monthId]) outcomes[bk][monthId] = {};
+  outcomes[bk][monthId][metricId] = val;
 }
 
 function renderOutcomes() {
   const months = data.months;
   const metrics = getActiveMetrics();
   const groups = [...new Set(metrics.map(m=>m.group))];
+  // 전체 뷰: 브랜드 선택 안내 배너 표시
+  const outcomeBrandNote = document.getElementById('outcomeBrandNote');
+  if (outcomeBrandNote) {
+    outcomeBrandNote.style.display = activeBrand === 'all' ? 'block' : 'none';
+    outcomeBrandNote.innerHTML = activeBrand === 'all'
+      ? '<strong>전체 합산 뷰</strong>: 브랜드별로 성과를 입력하려면 좌측에서 브랜드를 선택하세요.'
+      : '';
+  }
 
   let thead = '<thead><tr><th style="width:160px;text-align:left">지표</th>';
   months.forEach(m => { thead += `<th class="month-col-head" style="background:${m.color}18;border-top:3px solid ${m.color}">${m.name}</th>`; });
@@ -1566,7 +1657,7 @@ function deleteCustomMetric(id) {
   showSaveToast('지표 삭제됨','#dc2626');
 }
 
-// ── 초기화 ────────────────────────────────────────────────
+// ── 초기화 ────────────────────────────────────────
 loadCustomPlatforms();
 loadSavedData();
 renderAll();
