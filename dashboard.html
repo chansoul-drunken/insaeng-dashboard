@@ -165,10 +165,11 @@ table.dt tr.row-bleed td{background:rgba(232,57,26,.06);}
 <div class="error-banner" id="errorBanner">⚠️ <span id="errorMsg">–</span></div>
 
 <div class="section-label">마케팅 비용 요약</div>
-<div class="kpi-bar" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
+<div class="kpi-bar" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
 <div class="kpi-card"><div class="kpi-label">광고비</div><div class="kpi-value accent" id="k-adspend">–</div><div class="kpi-sub">VAT 별도 · 플랫폼 집행액</div><div class="kpi-mom" id="m-adspend"></div></div>
 <div class="kpi-card"><div class="kpi-label">쿠폰 할인금액</div><div class="kpi-value purple" id="k-disc">–</div><div class="kpi-sub">실 할인 지출액</div><div class="kpi-mom" id="m-disc"></div></div>
-<div class="kpi-card"><div class="kpi-label">총 마케팅 비용</div><div class="kpi-value accent" id="k-totalcost">–</div><div class="kpi-sub">광고비 + 쿠폰할인액</div><div class="kpi-mom" id="m-totalcost"></div></div>
+<div class="kpi-card"><div class="kpi-label">플랫폼 수수료 (추정)</div><div class="kpi-value yellow" id="k-comm">–</div><div class="kpi-sub" id="k-comm-sub">수수료율 적용 플랫폼 기준</div><div class="kpi-mom" id="m-comm"></div></div>
+<div class="kpi-card"><div class="kpi-label">총 비용 합계</div><div class="kpi-value accent" id="k-totalcost">–</div><div class="kpi-sub">광고비 + 쿠폰 + 수수료</div><div class="kpi-mom" id="m-totalcost"></div></div>
 </div>
 
 <div class="section-label">전체 광고 현황</div>
@@ -223,6 +224,28 @@ table.dt tr.row-bleed td{background:rgba(232,57,26,.06);}
 <div class="chart-title">월별 광고의존도 추이 (전체 플랫폼 합산, 매출마스터 기준)</div>
 <div class="trend-wrap"><canvas id="dependencyChart"></canvas></div>
 </div>
+
+<div class="section-label">실질 수익성 분석</div>
+<div class="coupon-wrap" style="margin-bottom:24px">
+<div class="table-header">
+  <span class="table-title">플랫폼별 수수료 · 순수익</span>
+  <span class="table-meta">순수익 = 전체매출 − 수수료(추정) − 광고비 − 쿠폰할인 | 수수료 미입력 플랫폼은 순수익에서 제외</span>
+</div>
+<table class="dt">
+<thead><tr>
+  <th>플랫폼</th>
+  <th class="num">전체매출</th>
+  <th class="num">수수료율</th>
+  <th class="num">수수료액 (추정)</th>
+  <th class="num">광고비</th>
+  <th class="num">쿠폰할인</th>
+  <th class="num">순수익</th>
+  <th class="num">순이익률</th>
+</tr></thead>
+<tbody id="profitBody"></tbody>
+</table>
+</div>
+
 
 <div class="section-label">신규 vs 재구매 분석</div>
 <div class="coupon-wrap">
@@ -294,6 +317,17 @@ table.dt tr.row-bleed td{background:rgba(232,57,26,.06);}
 <script>
 const PM={'배달의민족':{color:'#74C3A8'},'쿠팡이츠':{color:'#E7263C'},'요기요':{color:'#FA0050'},'땡겨요':{color:'#F5820F'},'배달특급':{color:'#FF6B35'},'먹깨비':{color:'#9B59B6'},'네이버':{color:'#03C75A'},'위메프오':{color:'#FF4081'}};
 const PO=['배달의민족','쿠팡이츠','요기요','땡겨요','배달특급','먹깨비','네이버','위메프오'];
+const COMM={
+  '배달의민족':{rate:0.1676,label:'16.76% (배민배달 기준)'},
+  '쿠팡이츠':{rate:0.098,label:'9.8% (중개6.8%+결제3%)'},
+  '요기요':{rate:0.099,label:'9.9% (요기요서비스)'},
+  '땡겨요':{rate:0.0506,label:'5.06% (중개2.2%+결제2.86%)'},
+  '배달특급':{rate:null,label:'미입력'},
+  '먹깨비':{rate:null,label:'미입력'},
+  '네이버':{rate:null,label:'미입력'},
+  '위메프오':{rate:null,label:'미입력'},
+};
+const commFee=(p,rev)=>COMM[p]&&COMM[p].rate!=null?Math.round(rev*COMM[p].rate):0;
 const color=p=>(PM[p]||{color:'#666'}).color;
 const W=n=>{n=+n||0;if(n>=100000000)return(n/100000000).toFixed(1)+'억';if(n>=10000000)return(n/10000000).toFixed(1)+'천만';if(n>=1000000)return(n/1000000).toFixed(1)+'백만';if(n>=10000)return Math.round(n/10000)+'만원';return n.toLocaleString()+'원';};
 const N=n=>{n=+n||0;if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=10000)return Math.round(n/1000)+'K';return n.toLocaleString();};
@@ -447,7 +481,9 @@ function globalTotals(adRows, cpRows, rmRows) {
   PO.forEach(p=>{if(adM[p]){const t=sumAd(adM[p]);spend+=t.spend;imp+=t.imp;clk+=t.clk;cvr+=t.cvr;rev+=t.rev;pureAdRev+=t.pureAdRev;}});
   const cp = sumCp(cpRows||[]);
   const rm = sumRm(rmRows);
-  return {spend, imp, clk, cvr, rev, pureAdRev, disc:cp.disc, natural:rm.natural, cprev:rm.cprev, total:rm.total};
+  const _rmByP=groupBy(rmRows);
+  const commTotal=PO.reduce((s,p)=>{const rows=_rmByP[p]||[];const rev=rows.length?sumRm(rows).total:0;return s+commFee(p,rev);},0);
+  return {spend, imp, clk, cvr, rev, pureAdRev, disc:cp.disc, natural:rm.natural, cprev:rm.cprev, total:rm.total, comm:commTotal};
 }
 
 // ── RENDER ──
@@ -468,6 +504,7 @@ function renderAll() {
   renderKPI(gt, gtPrev);
   try { renderRevenue(gt); } catch(e) { console.warn('매출 오류:', e); }
   try { renderDependencyTrend(); } catch(e) { console.warn('트렌드 오류:', e); }
+  try { renderProfitability(adM, cpM, rmM); } catch(e) { console.warn('수익성 오류:', e); }
   try { renderBuyers(rmM); } catch(e) { console.warn('신규재구매 오류:', e); }
   try { renderCoupons(filteredCp, gt); } catch(e) { console.warn('쿠폰 오류:', e); }
   try { renderCharts(adM, cpM, rmM); } catch(e) { console.warn('차트 오류:', e); }
@@ -480,7 +517,9 @@ function renderKPI(gt, gtPrev){
   const totalCost = gt.spend + (gt.disc||0);
   document.getElementById('k-adspend').textContent=W(gt.spend);
   document.getElementById('k-disc').textContent=W(gt.disc||0);
-  document.getElementById('k-totalcost').textContent=W(totalCost);
+  document.getElementById('k-comm').textContent=W(gt.comm||0);
+  const totalCostFull = gt.spend+(gt.disc||0)+(gt.comm||0);
+  document.getElementById('k-totalcost').textContent=W(totalCostFull);
   document.getElementById('k-imp').textContent=N(gt.imp);
   document.getElementById('k-clk').textContent=N(gt.clk);
   document.getElementById('k-ctr').textContent='CTR '+P(gt.clk,gt.imp);
@@ -575,6 +614,44 @@ function setCouponSort(mode){
   document.getElementById('sortRate').classList.toggle('active', mode==='rate');
   renderCoupons(filteredCp, globalTotals(filteredAd, filteredCp, filteredRm));
 }
+
+function renderProfitability(adM, cpM, rmM) {
+  const rows = PO.map(p => {
+    const rm = rmM[p] ? sumRm(rmM[p]) : {total:0,natural:0,cprev:0};
+    const ad = adM[p] ? sumAd(adM[p]) : {spend:0};
+    const cp = cpM[p] ? sumCp(cpM[p]) : {disc:0};
+    const comm = commFee(p, rm.total);
+    const commRate = COMM[p] ? COMM[p].rate : null;
+    const commLabel = COMM[p] ? COMM[p].label : '–';
+    const net = commRate !== null ? rm.total - comm - ad.spend - cp.disc : null;
+    const netRate = (rm.total > 0 && net !== null) ? net / rm.total * 100 : null;
+    return {p, total:rm.total, comm, commRate, commLabel, spend:ad.spend, disc:cp.disc, net, netRate};
+  }).filter(r => r.total > 0 || r.spend > 0);
+
+  document.getElementById('profitBody').innerHTML = rows.map(r => {
+    const commCell = r.commRate !== null
+      ? `<span style="color:var(--yellow)">${W(r.comm)}</span>`
+      : `<span style="color:var(--text3)">미입력</span>`;
+    const netCell = r.net !== null
+      ? `<span style="color:${r.net>=0?'var(--green)':'var(--accent2)'}">${W(r.net)}</span>`
+      : `<span style="color:var(--text3)">–</span>`;
+    const netRateCell = r.netRate !== null
+      ? `<span style="color:${r.netRate>=20?'var(--green)':r.netRate>=10?'var(--yellow)':'var(--accent2)'};font-family:var(--mono)">${r.netRate.toFixed(1)}%</span>`
+      : '–';
+    const rateLabel = r.commRate !== null ? `<span style="font-family:var(--mono);color:var(--yellow)">${(r.commRate*100).toFixed(1)}%</span><div style="font-size:10px;color:var(--text3)">${r.commLabel}</div>` : `<span style="color:var(--text3)">미입력</span>`;
+    return `<tr>
+      <td><div class="p-pill"><span class="p-dot" style="background:${color(r.p)}"></span>${r.p}</div></td>
+      <td class="num">${W(r.total)}</td>
+      <td class="num">${rateLabel}</td>
+      <td class="num">${commCell}</td>
+      <td class="num" style="color:var(--accent2)">${W(r.spend)}</td>
+      <td class="num" style="color:var(--purple)">${W(r.disc)}</td>
+      <td class="num">${netCell}</td>
+      <td class="num">${netRateCell}</td>
+    </tr>`;
+  }).join('');
+}
+
 
 function renderBuyers(rmM) {
   const rows = PO.map(p => {
