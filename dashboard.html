@@ -137,6 +137,20 @@ table.dt tr.row-bleed td{background:rgba(232,57,26,.06);}
 .p-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .dash-footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--text3);font-family:var(--mono);}
 .badge-verify{display:inline-flex;padding:1px 6px;border-radius:3px;font-size:9px;font-family:var(--mono);background:rgba(255,255,255,.06);color:var(--text3);margin-left:6px;}
+
+.promo-grid{display:flex;flex-direction:column;gap:6px;padding:14px 18px;}
+.promo-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.promo-row:last-child{border-bottom:none;}
+.promo-platform{display:flex;align-items:center;gap:6px;min-width:90px;flex-shrink:0;}
+.promo-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.promo-pname{font-size:11px;font-weight:600;color:var(--text2);}
+.promo-slots{display:flex;flex-wrap:wrap;gap:5px;flex:1;}
+.promo-chip{display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border2);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--text2);}
+.promo-chip.has-coupon{border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.08);}
+.promo-chip-name{color:var(--text);font-weight:500;}
+.promo-chip-benefit{color:var(--text3);}
+.promo-chip-coupon{font-size:9px;background:rgba(167,139,250,.2);color:var(--purple);border-radius:3px;padding:1px 4px;margin-left:2px;}
+.promo-none{font-size:11px;color:var(--text3);font-style:italic;}
 </style>
 </head>
 <body>
@@ -261,6 +275,15 @@ table.dt tr.row-bleed td{background:rgba(232,57,26,.06);}
 </tr></thead>
 <tbody id="buyerBody"></tbody>
 </table>
+</div>
+
+<div class="section-label">이달의 프로모션 모아보기</div>
+<div class="coupon-wrap" style="margin-bottom:24px">
+<div class="table-header">
+  <span class="table-title">플랫폼별 집행 구좌 · 혜택 요약</span>
+  <span class="table-meta" id="promoMeta">–</span>
+</div>
+<div class="promo-grid" id="promoGrid"></div>
 </div>
 
 <div class="section-label">쿠폰 · 프로모션 상세</div>
@@ -504,6 +527,7 @@ function renderAll() {
   renderKPI(gt, gtPrev);
   try { renderRevenue(gt); } catch(e) { console.warn('매출 오류:', e); }
   try { renderDependencyTrend(); } catch(e) { console.warn('트렌드 오류:', e); }
+  try { renderPromo(adM, cpM); } catch(e) { console.warn('프로모션 오류:', e); }
   try { renderProfitability(adM, cpM, rmM); } catch(e) { console.warn('수익성 오류:', e); }
   try { renderBuyers(rmM); } catch(e) { console.warn('신규재구매 오류:', e); }
   try { renderCoupons(filteredCp, gt); } catch(e) { console.warn('쿠폰 오류:', e); }
@@ -649,6 +673,37 @@ function renderProfitability(adM, cpM, rmM) {
       <td class="num">${netCell}</td>
       <td class="num">${netRateCell}</td>
     </tr>`;
+  }).join('');
+}
+
+
+function renderPromo(adM, cpM) {
+  const activeSlots = PO.reduce((t,p) => t + (adM[p]||[]).filter(s=>s['광고비']>0).length, 0);
+  document.getElementById('promoMeta').textContent = '집행 중 ' + activeSlots + '개 구좌';
+
+  document.getElementById('promoGrid').innerHTML = PO.map(p => {
+    const slots = (adM[p]||[]);
+    const active = slots.filter(s => s['광고비'] > 0 || s['집행기간'] !== '-');
+    const cpSet = new Set((cpM[p]||[]).map(c => c['구좌명']));
+
+    const chipsHtml = active.length
+      ? active.map(s => {
+          const hasCoupon = s['쿠폰여부']==='Y' || cpSet.has(s['구좌명']);
+          return `<span class="promo-chip ${hasCoupon?'has-coupon':''}">
+            <span class="promo-chip-name">${s['구좌명']}</span>
+            ${s['주요혜택']&&s['주요혜택']!=='-'?`<span class="promo-chip-benefit">· ${s['주요혜택']}</span>`:''}
+            ${hasCoupon?'<span class="promo-chip-coupon">🎫쿠폰</span>':''}
+          </span>`;
+        }).join('')
+      : '<span class="promo-none">미집행</span>';
+
+    return `<div class="promo-row">
+      <div class="promo-platform">
+        <span class="promo-dot" style="background:${color(p)}"></span>
+        <span class="promo-pname">${p}</span>
+      </div>
+      <div class="promo-slots">${chipsHtml}</div>
+    </div>`;
   }).join('');
 }
 
