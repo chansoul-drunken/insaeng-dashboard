@@ -2,9 +2,9 @@
 <html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>인생푸드 마케팅브랜딩팀 — 2026 팀 리빌딩 플랜</title>
+<title>인생푸드 마케팅브랜딩팀 — 2026 팀 플랜</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Noto+Serif+KR:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -21,8 +21,6 @@
   --font-d:'Noto Serif KR',serif; --font-b:'Noto Sans KR',sans-serif;
 }
 body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.75;min-height:100vh}
-
-/* ── HEADER ── */
 .site-header{background:var(--navy);padding:3.5rem 2rem 3rem;overflow:hidden;position:relative}
 .site-header::after{content:'REBUILD';position:absolute;right:-10px;bottom:-20px;font-size:120px;font-weight:700;color:rgba(255,255,255,.03);font-family:var(--font-d);letter-spacing:-.04em;pointer-events:none;line-height:1}
 .header-inner{max-width:980px;margin:0 auto;position:relative}
@@ -31,8 +29,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .site-header h1{font-family:var(--font-d);font-size:clamp(24px,4vw,42px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.025em;margin-bottom:.75rem}
 .site-header h1 em{font-style:normal;color:#C8A97A}
 .header-sub{font-size:14px;color:#6A7FA0;max-width:520px}
-
-/* ── PROGRESS BAR ── */
 .prog-bar{background:var(--surface);border-bottom:1px solid var(--rule);padding:10px 2rem;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.06)}
 .prog-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px}
 .prog-label{font-size:12px;font-weight:500;color:var(--ink-mid);white-space:nowrap}
@@ -45,11 +41,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .phase-pill.p2{background:var(--p2-pale);color:var(--p2)}
 .phase-pill.p3{background:var(--p3-pale);color:var(--p3)}
 .phase-pill.active{border-color:currentColor}
-
-/* ── MAIN ── */
 .main{max-width:980px;margin:0 auto;padding:2.5rem 2rem 6rem}
-
-/* ── ROLE SHIFT ── */
 .role-shift{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:1.75rem;margin-bottom:2.5rem}
 .role-shift-title{font-family:var(--font-d);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
 .role-shift-title::before{content:'';width:4px;height:20px;background:var(--chan);border-radius:2px}
@@ -63,24 +55,16 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .bar-exec{background:var(--chan)}
 .bar-strat{background:var(--p2)}
 .role-note{font-size:11.5px;color:var(--ink-muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--rule)}
-
-/* ── PHASE SECTION ── */
 .phase-section{margin-bottom:2.5rem;scroll-margin-top:58px}
 .phase-header{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;padding-bottom:12px;border-bottom:2px solid var(--rule)}
 .phase-badge{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;white-space:nowrap}
 .phase-title{font-family:var(--font-d);font-size:19px;font-weight:600;color:var(--ink)}
 .phase-period{font-size:12px;color:var(--ink-muted);margin-left:auto;white-space:nowrap}
-
-/* ── MISSION GRID ── */
 .mission-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-
-/* ── MEMBER HEADER ── */
 .member-col-head{border-radius:10px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .member-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
 .member-name{font-size:14px;font-weight:600}
 .member-role{font-size:11px;margin-top:1px}
-
-/* ── TASK CARD ── */
 .task-list{display:flex;flex-direction:column;gap:7px}
 .task-item{background:var(--surface);border:1px solid var(--rule);border-radius:8px;overflow:hidden;transition:box-shadow .15s}
 .task-item:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
@@ -103,42 +87,32 @@ body.edit-mode .task-detail{display:block}
 .task-detail ul{list-style:none;margin-top:6px;display:flex;flex-direction:column;gap:3px}
 .task-detail li{display:flex;gap:6px;align-items:baseline}
 .task-detail li::before{content:'·';color:var(--ink-muted);flex-shrink:0;pointer-events:none}
-body.edit-mode .task-detail li[data-editable]{padding:1px 3px}
 .task-toggle{display:flex;gap:3px;padding:4px 12px 8px 41px}
 .tog-btn{font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px;border:1.5px solid var(--rule);background:#fff;cursor:pointer;color:var(--ink-muted);transition:all .1s}
 .tog-btn:hover{border-color:var(--p1);color:var(--p1)}
 .tog-btn.t-done{background:var(--p1-pale);color:var(--p1);border-color:#A0D4BC}
 .tog-btn.t-prog{background:var(--p2-pale);color:var(--p2);border-color:#A0B8D8}
 .tog-btn.t-todo{background:#fff;color:var(--ink-muted);border-color:var(--rule)}
-
-/* ── PRIORITY CALLOUT ── */
 .priority-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:2rem}
 .priority-card{border-radius:10px;padding:1rem 1.25rem;border:1px solid var(--rule)}
 .priority-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .priority-list{list-style:none;display:flex;flex-direction:column;gap:4px}
 .priority-list li{font-size:13px;color:var(--ink-mid);display:flex;gap:7px;line-height:1.5}
 .priority-list li::before{content:'→';color:var(--ink-muted);flex-shrink:0;font-size:12px}
-
-/* ── WARN BOX ── */
 .warn-box{background:var(--warn-pale);border:1px solid #F0C0C0;border-radius:10px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:13px;color:var(--warn)}
 .warn-box strong{font-weight:600}
-
-/* ── SUMMARY ── */
 .summary-strip{background:var(--navy);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .sum-item{text-align:center}
 .sum-num{font-family:var(--font-d);font-size:28px;font-weight:700;color:#C8A97A;line-height:1}
 .sum-label{font-size:11px;color:#6A7FA0;margin-top:4px}
-
 footer{background:var(--navy);color:#3A4A60;text-align:center;padding:2rem;font-size:12px;line-height:2}
-
-/* 캠페인 단계 태그 */
 .camp-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;letter-spacing:.03em}
 .camp-1{background:#EAF0FB;color:#1A3E7A}
 .camp-2{background:#FBE8E8;color:#A32020}
 .camp-3{background:#E5F4EE;color:#0A5C47}
 .camp-4{background:#FEF9EC;color:#7B4F00}
-
-/* 편집 FAB */
+/* 수치 하이라이트 */
+.kpi-inline{display:inline;background:#FEF9EC;color:#7B4F00;font-weight:700;padding:0 4px;border-radius:3px;font-size:11px}
 #edit-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .fab-btn{display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:40px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font-b);box-shadow:0 2px 16px rgba(0,0,0,.18);transition:all .15s;white-space:nowrap}
 .fab-btn:hover{transform:translateY(-1px)}
@@ -158,36 +132,15 @@ body.edit-mode .task-add-btn{display:block}
 .task-del-btn{display:none;position:absolute;top:10px;right:8px;width:18px;height:18px;border-radius:50%;background:#F0C0C0;border:none;cursor:pointer;font-size:11px;color:#8B1A1A;align-items:center;justify-content:center;z-index:5}
 body.edit-mode .task-del-btn{display:flex}
 footer strong{color:#6A7FA0}
-
+.li-del{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;margin-left:5px;background:#F0C0C0;border:none;cursor:pointer;font-size:9px;color:#8B1A1A;flex-shrink:0;vertical-align:middle;line-height:1;padding:0}
+.li-del:hover{background:#F09595}
+.li-add{display:block;font-size:11px;color:#7B4F00;background:none;border:none;cursor:pointer;padding:3px 0 0 0;font-family:inherit;text-align:left}
+.li-add:hover{text-decoration:underline}
+body.edit-mode .task-detail li{outline:1.5px dashed transparent;border-radius:3px;padding:1px 3px}
+body.edit-mode .task-detail li:focus{outline:1.5px dashed #C8A97A;background:rgba(200,169,122,.07)}
 @media(max-width:700px){
   .mission-cols,.role-phases,.priority-row,.summary-strip{grid-template-columns:1fr}
   .phase-pills{display:none}
-}
-</style>
-
-
-
-
-<style id="li-edit-css">
-.li-del{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:14px;height:14px;border-radius:50%;margin-left:5px;
-  background:#F0C0C0;border:none;cursor:pointer;
-  font-size:9px;color:#8B1A1A;flex-shrink:0;vertical-align:middle;
-  line-height:1;padding:0;
-}
-.li-del:hover{background:#F09595}
-.li-add{
-  display:block;font-size:11px;color:#7B4F00;background:none;
-  border:none;cursor:pointer;padding:3px 0 0 0;
-  font-family:inherit;text-align:left;
-}
-.li-add:hover{text-decoration:underline}
-body.edit-mode .task-detail li{
-  outline:1.5px dashed transparent;border-radius:3px;padding:1px 3px;
-}
-body.edit-mode .task-detail li:focus{
-  outline:1.5px dashed #C8A97A;background:rgba(200,169,122,.07);
 }
 </style>
 </head>
@@ -204,8 +157,8 @@ body.edit-mode .task-detail li:focus{
 <div class="prog-bar">
   <div class="prog-inner">
     <span class="prog-label">전체 진행률</span>
-    <div class="prog-track"><div class="prog-fill" id="pFill" style="width: 0%;"></div></div>
-    <span class="prog-count" id="pCount">0 / 39</span>
+    <div class="prog-track"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
+    <span class="prog-count" id="pCount">0 / 0</span>
     <div class="phase-pills">
       <span class="phase-pill p1 active" onclick="scrollTo('ph1')">Phase 1</span>
       <span class="phase-pill p2 active" onclick="scrollTo('ph2')">Phase 2</span>
@@ -216,15 +169,13 @@ body.edit-mode .task-detail li:focus{
 
 <main class="main">
 
-  <!-- 요약 -->
   <div class="summary-strip">
     <div class="sum-item"><div class="sum-num">3</div><div class="sum-label">팀원 수 (팀장 포함)</div></div>
     <div class="sum-item"><div class="sum-num">3</div><div class="sum-label">구축 Phase</div></div>
     <div class="sum-item"><div class="sum-num" id="sumDone">0</div><div class="sum-label">완료 태스크</div></div>
-    <div class="sum-item"><div class="sum-num" id="sumTotal">39</div><div class="sum-label">전체 태스크</div></div>
+    <div class="sum-item"><div class="sum-num" id="sumTotal">0</div><div class="sum-label">전체 태스크</div></div>
   </div>
 
-  <!-- 팀장 역할 변화 -->
   <div class="role-shift">
     <div class="role-shift-title">팀장(Chan) 역할 비중 변화 목표</div>
     <div class="role-phases">
@@ -260,175 +211,153 @@ body.edit-mode .task-detail li:focus{
       <h2 class="phase-title">기반 수립</h2>
       <span class="phase-period">0 ~ 1개월</span>
     </div>
-
     <div class="mission-cols">
 
       <!-- 팀장 -->
       <div>
         <div class="member-col-head" style="background:var(--chan-pale);border:1px solid #E0B090">
           <div class="member-avatar" style="background:var(--chan)">C</div>
-          <div>
-            <div class="member-name" style="color:var(--chan)">최찬솔</div>
-            <div class="member-role" style="color:#B07840">기반 설계 + 타팀 조율</div>
-          </div>
+          <div><div class="member-name" style="color:var(--chan)">최찬솔</div><div class="member-role" style="color:#B07840">기반 설계 + 타팀 조율</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p1-c1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p1-c1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">팀 미션 한 문장 확정</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>초안: "브랜드를 알리고, 가맹 유입을 만들고, 점주 매출을 받친다"</li><li>1:1 미팅에서 대표와 함께 확정</li><li>확정 후 팀 보드 게시</li></ul></div>
-          </div><div class="task-item" data-id="p1-c2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>확정문: "브랜드를 알리고, 가맹 유입을 만들고, 점주 매출을 받친다"</li><li>1:1 미팅에서 대표와 함께 확정</li><li>확정 후 팀 보드 게시</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p1-c2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">마케팅팀 R&amp;R 문서 작성</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>하는 일 / 안 하는 일 목록</li><li>영업팀·신사업팀·디자이너와 경계 합의</li><li>핸드오프 기준(기획→제작→업로드) 포함</li></ul></div>
-          </div><div class="task-item" data-id="p1-c4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p1-c4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
-              <span class="task-text">&nbsp;팀 공간 기본 구조 구축</span>
+              <span class="task-text">팀 공간 기본 구조 구축</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>팀 미션·R&amp;R·연락처</li><li>채널별 운영 히스토리 폴더</li><li>체크리스트·기준서 저장 위치</li><li>캠페인 아카이브 템플릿</li></ul></div>
-          </div><div class="task-item" data-id="p1-c5">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p1-c5">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">주간 팀 미팅 루틴 시작</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>형식: 이번 주 완료·다음 주 계획·이슈 3가지</li><li>팀원이 발표, 팀장이 피드백</li><li>길어지면 의제 사전 공유 원칙</li></ul></div>
-          </div><div class="task-item" data-id="p1-c6">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p1-c6">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">팀원별 담당 영역 초안 분배 + 합의</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>마케팅사원: 채널 운영·데이터 수집·광고 실행</li><li>디자이너: 브랜드 에셋·콘텐츠 디자인·템플릿</li><li>팀장: 전략·기획·대외·예산·교육</li></ul></div>
-          </div></div>
+          </div>
+          <div class="task-item" data-id="p1-c7">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
+              <div class="task-chk" onclick="cycle(event,this)"></div>
+              <span class="task-text">예산·KPI 수치화 문서 확정 및 공유</span>
+              <span class="task-exp">▾</span>
+            </div>
+            <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
+            <div class="task-detail"><ul><li>확정예산 연 6억 (플랫폼광고 3억 + 콘텐츠 3억)</li><li>추가요청 연 1.2억 (브이웍스·자체운영·오픈세팅 등)</li><li>PPL·정보프로그램 특별예산 2천만원 별도</li><li>전체 추정 예산 볼륨 7.4억 팀원 공유</li><li>미확정 항목(마이프차·삼대미역·직영5%) 확정 일정 협의</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 마케팅사원 -->
       <div>
         <div class="member-col-head" style="background:var(--mk-pale);border:1px solid #A0C8D8">
           <div class="member-avatar" style="background:var(--mk)">M</div>
-          <div>
-            <div class="member-name" style="color:var(--mk)">마케팅 심수민</div>
-            <div class="member-role" style="color:#2A6A8A">채널 구조 파악 + 루틴 입문</div>
-          </div>
+          <div><div class="member-name" style="color:var(--mk)">마케팅 심수민</div><div class="member-role" style="color:#2A6A8A">채널 구조 파악 + 루틴 입문</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p1-m1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p1-m1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">운영 중인 전 채널 현황 파악<span class="camp-tag camp-3">03 집행 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>인스타·유튜브·틱톡 계정 접근 권한 확보</li><li>최근 3개월 성과 데이터 수집</li><li>채널별 현재 구독자·조회수 베이스라인 기록</li></ul></div>
-          </div><div class="task-item" data-id="p1-m2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>인스타·유튜브·블로그·스레드 계정 접근 권한 확보</li><li>최근 3개월 성과 데이터 수집 — 채널별 조회수·저장율·언급량 베이스라인</li><li>유튜브 50% · 인스타 25% · 블로그 10% · 스레드 5% · CF 10% 배분 구조 파악</li><li>브이웍스(메타·당근·네이버) 월 600만원 집행 현황 확인</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p1-m2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
-              <span class="task-text">네이버 광고·배민 광고 계정 셋업 파악<span class="camp-tag camp-3">03 집행 기반</span></span>
+              <span class="task-text">광고 계정 셋업 파악 (네이버·배달앱)<span class="camp-tag camp-3">03 집행 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>팀장과 함께 실계정 접속·구조 파악</li><li>현재 집행 중인 캠페인 목록 확인</li><li>광고비 집행 내역 정리</li></ul></div>
-          </div><div class="task-item" data-id="p1-m3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>팀장과 함께 실계정 접속·구조 파악</li><li>배달앱 플랫폼광고 월 2,500만원 집행 구조 파악 (배민·쿠팡이츠·요기요 등)</li><li>현재 집행 중인 캠페인 목록 및 전환율 현황 확인</li><li>클릭→주문 전환율 목표 15%+ 기준 숙지</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p1-m3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">대행사 담당자 파악 + 히스토리 수령<span class="camp-tag camp-1">01 기획 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>기존 브리핑 자료·결과물 수령</li><li>계약 조건·집행 금액 파악</li></ul></div>
-          </div><div class="task-item" data-id="p1-m4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>브이웍스 담당자 파악 (메타·당근·네이버 대행, 월 600만원)</li><li>아프니까사장이다·마이프차 담당자 및 집행현황 파악 (2개월 400~440만원)</li><li>기존 브리핑 자료·결과물 수령</li><li>메타 소재 436건 중 300건(69%) 샵인샵 문의 현황 파악 — 소재 다각화 과제</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p1-m4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">가맹 상담 폼 유입 경로 항목 추가<span class="camp-tag camp-4">04 리뷰 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>가입 상담 폼 점검</li><li>유튜브·인스타·네이버·지인·기타 선택지</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>상담 폼에 유입 경로 선택 항목 추가 — 유튜브·인스타·네이버·아프니까사장이다·지인·기타</li><li>채널별 추적 링크(UTM/단축URL) 삽입 — 1순위 귀속 방법</li><li>목표: 브이웍스 분기 DB 500건 / 자체운영 월 100건(분기 300건) 채널별 분리 집계</li><li>삼대미역 지역타겟 DB 분기 100건 별도 집계 구조 마련</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 디자이너 -->
       <div>
         <div class="member-col-head" style="background:var(--ds-pale);border:1px solid #A0C890">
           <div class="member-avatar" style="background:var(--ds)">D</div>
-          <div>
-            <div class="member-name" style="color:var(--ds)">디자이너 윤지수</div>
-            <div class="member-role" style="color:#2A6A2A">브랜드 기준 파악 + 요청 구조 정립</div>
-          </div>
+          <div><div class="member-name" style="color:var(--ds)">디자이너 윤지수</div><div class="member-role" style="color:#2A6A2A">브랜드 기준 파악 + 요청 구조 정립</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p1-d1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p1-d1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">기존 브랜드 에셋 전수 파악 + 정리<span class="camp-tag camp-2">02 제작 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>4개 브랜드 로고·컬러·폰트 현황 목록화</li><li>사용 중인 에셋 vs 미사용 에셋 분류</li><li>공유 드라이브 폴더 구조 정리</li></ul></div>
-          </div><div class="task-item" data-id="p1-d2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>4개 브랜드(인생아구찜·삼대미역·어화락·인생식탁) 로고·컬러·폰트 현황 목록화</li><li>인생아구찜·어화락 우선 — 분기 내 1차 가이드라인 완성 목표</li><li>공유 드라이브 폴더 구조 정리</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p1-d2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">콘텐츠 디자인 요청 프로세스 초안 수립<span class="camp-tag camp-2">02 제작 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>요청 폼 양식 초안 작성 (브랜드·목적·사이즈·납기)</li><li>수정 횟수 기준 명시 (기본 2회)</li><li>긴급 요청 정의 및 추가 리드타임 기준</li></ul></div>
-          </div><div class="task-item" data-id="p1-d3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p1-d3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">자주 쓰는 SNS 포맷 템플릿 파악<span class="camp-tag camp-2">02 제작 기반</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>인스타 피드·스토리·유튜브 썸네일 사이즈 기준 정리</li><li>기존에 사용된 템플릿이 있다면 통일 작업</li><li>없다면 브랜드별 기본 템플릿 1종씩 제작 계획 수립</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>인스타 피드·스토리·유튜브 썸네일 사이즈 기준 정리</li><li>콘텐츠 월 2,500만원 예산 기준 채널별 제작 볼륨 파악 (유튜브·인스타·블로그·스레드·CF)</li><li>없다면 브랜드별 기본 템플릿 1종씩 제작 계획 수립</li></ul></div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -441,189 +370,162 @@ body.edit-mode .task-detail li:focus{
       <h2 class="phase-title">역량 주입</h2>
       <span class="phase-period">1 ~ 2개월</span>
     </div>
-
     <div class="mission-cols">
 
       <!-- 팀장 -->
       <div>
         <div class="member-col-head" style="background:var(--chan-pale);border:1px solid #E0B090">
           <div class="member-avatar" style="background:var(--chan)">C</div>
-          <div>
-            <div class="member-name" style="color:var(--chan)">최찬솔</div>
-            <div class="member-role" style="color:#B07840">교육·피드백·방향 조정</div>
-          </div>
+          <div><div class="member-name" style="color:var(--chan)">최찬솔</div><div class="member-role" style="color:#B07840">교육·피드백·방향 조정</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p2-c1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p2-c1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">팀원 주 1회 1:1 코칭 루틴 시작</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>형식: 막힌 것·배운 것·다음 주 목표 3가지</li><li>"왜 이 방향인지" 논리 구조 함께 정리</li><li>팀원 스스로 판단 기준 갖출 때까지 지속</li></ul></div>
-          </div><div class="task-item" data-id="p2-c2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p2-c2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">채널별 운영 체크리스트 팀원과 공동 작성</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>팀원이 직접 참여해서 만들어야 체화됨</li><li>광고 집행·콘텐츠 업로드·PR 배포 체크리스트 4종</li><li>함께 만드는 리스트</li></ul></div>
-          </div><div class="task-item" data-id="p2-c3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>팀원이 직접 참여해서 만들어야 체화됨</li><li>광고 집행·콘텐츠 업로드·PR 배포 체크리스트 4종</li><li>인지도 지표(조회수·언급량)와 전환 지표(DB건수·CPA) 혼용 금지 원칙 명시</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-c3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">디자인 가이드 정립</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>콘텐츠: 브랜드 가이드 준수 여부·메시지 명확성</li><li>광고: 타겟·예산·기간 기준 충족 여부</li><li>디자인: 사이즈·해상도·브랜드 컬러 기준</li><li>브랜드 어플리케이션</li></ul></div>
-          </div><div class="task-item" data-id="p2-c4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p2-c4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">대행사 브리핑 템플릿 완성 + 첫 집행 적용</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>목적·타겟·레퍼런스·금지사항 포함</li><li>마케팅사원이 브리핑 작성 → 팀장 검토 → 대행사 전달 루틴</li><li>1회 적용 후 개선사항 반영</li></ul></div>
-          </div><div class="task-item" data-id="p2-c5">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>목적·타겟·레퍼런스·금지사항 포함</li><li>마케팅사원이 브리핑 작성 → 팀장 검토 → 대행사 전달 루틴</li><li>브이웍스 소재 다각화 방향 포함 (샵인샵 외 유형 테스트)</li><li>1회 적용 후 개선사항 반영</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-c5">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">KPI 월별 현황 시트 팀원 직접 입력 구조 구축</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>팀장이 채우는 게 아니라 팀원이 채우는 구조</li><li>검색량·언급량·주문 수·유입 경로 월별 기록</li><li>팀장은 입력된 데이터로 분석·판단만</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>팀원이 채우는 구조 — 팀장은 분석·판단만</li><li>B2B: DB건수·CPA 월별 기록 (브이웍스 목표 CPA 4만원/건)</li><li>B2C: 조회수·언급량 증감률·인스타 저장율 월별 기록 (분기 조회수 100만회 목표)</li><li>네이버 데이터랩·썸트렌드 자동화 툴 활용 권장</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 마케팅사원 -->
       <div>
         <div class="member-col-head" style="background:var(--mk-pale);border:1px solid #A0C8D8">
           <div class="member-avatar" style="background:var(--mk)">M</div>
-          <div>
-            <div class="member-name" style="color:var(--mk)">마케팅 심수민</div>
-            <div class="member-role" style="color:#2A6A8A">채널 운영 루틴 장악</div>
-          </div>
+          <div><div class="member-name" style="color:var(--mk)">마케팅 심수민</div><div class="member-role" style="color:#2A6A8A">채널 운영 루틴 장악</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p2-m1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p2-m1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">네이버 광고 운영 실계정 교육 완료<span class="camp-tag camp-3">03 집행</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>Place Ads·GFA·파워링크 실계정 함께 설정</li><li>캠페인 생성·예산 조정·성과 확인 혼자 가능</li><li>완료 기준: 팀장 없이 광고 1개 집행 완주</li></ul></div>
-          </div><div class="task-item" data-id="p2-m2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>Place Ads·GFA·파워링크 실계정 함께 설정</li><li>캠페인 생성·예산 조정·성과 확인 혼자 가능</li><li>네이버 플레이스 클릭·저장수 전월 대비 +10% 목표 숙지</li><li>완료 기준: 팀장 없이 광고 1개 집행 완주</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-m2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">배달앱 광고 운영 실계정 운영<span class="camp-tag camp-3">03 집행</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>플랫폼 구좌별 운영 구조 파악</li><li>요일·시간대 스케줄 조정</li><li>플랫폼 별 성과 분석</li></ul></div>
-          </div><div class="task-item" data-id="p2-m3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>플랫폼 구좌별 운영 구조 파악 (배민·쿠팡이츠·요기요 등, 월 2,500만원)</li><li>클릭→주문 전환율 15%+ 목표 추적 — 배달플랫폼 대시보드 실측치 기반</li><li>요일·시간대 스케줄 조정</li><li>3개월 내 신규 오픈 매장 세팅 지원 (목표 20개, 매장당 세팅비 17만원)</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-m3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">데이터 수집 루틴 단독 담당 시작<span class="camp-tag camp-4">04 리뷰</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>네이버 데이터랩·썸트렌드·플랫폼 통계등 집계루틴 설정</li><li>정해진 형식으로 기록</li></ul></div>
-          </div><div class="task-item" data-id="p2-m4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>브랜드 언급량 증감률 — 블랙키위·썸트렌드 월별 집계 (목표: 전월 대비 +10%)</li><li>가맹개설: 채널별 DB건수·CPA 월별 기록 (브이웍스 목표 월 150건 / 자체운영 월 100건)</li><li>삼대미역 지역타겟 DB 별도 집계 (분기 목표 100건)</li><li>콘텐츠 인지도: 조회수 CPV 채널별 비교 (유튜브 93.75원·인스타 62.5원·블로그 50원)</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-m4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">가맹 문의 유입 경로 월별 취합 보고<span class="camp-tag camp-4">04 리뷰</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>상담 폼 데이터·채널별 링크 유입 수 집계</li><li>월별 채널별 유입 비율 표 작성</li><li>보고 형식으로 정리</li></ul></div>
-          </div><div class="task-item" data-id="p2-m5">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>상담 폼 데이터·채널별 링크 유입 수 집계</li><li>월별 채널별 유입 비율 표 작성 (브이웍스·자체운영·아프니까사장이다·삼대미역 분리)</li><li>실적 DB 건수 vs 목표 (브이웍스 분기 500건, 자체운영 분기 300건) 비교 보고</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-m5">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">SNS 콘텐츠 업로드 체크리스트 단독 완주<span class="camp-tag camp-2">02 제작·게이트</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>기획·디자인 요청·업로드·태그 설정·성과 기록 전 과정</li><li>팀장 확인 없이 체크리스트만 보고 완주</li><li>2회 연속 오류 없으면 단독 실행 권한 부여</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>기획·디자인 요청·업로드·태그 설정·성과 기록 전 과정</li><li>팀장 확인 없이 체크리스트만 보고 완주</li><li>분기 누적 조회수 100만회 목표 대비 진척 확인 포함</li><li>2회 연속 오류 없으면 단독 실행 권한 부여</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 디자이너 -->
       <div>
         <div class="member-col-head" style="background:var(--ds-pale);border:1px solid #A0C890">
           <div class="member-avatar" style="background:var(--ds)">D</div>
-          <div>
-            <div class="member-name" style="color:var(--ds)">디자이너 윤지수</div>
-            <div class="member-role" style="color:#2A6A2A">브랜드 가이드라인 수립</div>
-          </div>
+          <div><div class="member-name" style="color:var(--ds)">디자이너 윤지수</div><div class="member-role" style="color:#2A6A2A">브랜드 가이드라인 수립</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p2-d1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p2-d1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">인생아구찜·어화락 브랜드 가이드라인 1차 수립<span class="camp-tag camp-2">02 제작</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>컬러·폰트·로고 사용 기준·금지 패턴</li><li>SNS별 이미지 톤&amp;매너 기준</li><li>없으면 콘텐츠마다 톤이 달라지고 매번 수정 반복</li></ul></div>
-          </div><div class="task-item" data-id="p2-d2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>컬러·폰트·로고 사용 기준·금지 패턴</li><li>SNS별 이미지 톤&amp;매너 기준 — 인스타 저장율 3%+ 목표와 연계</li><li>분기 내 완성 목표 (예산·KPI 수치화 문서 기준)</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p2-d2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">SNS 썸네일·피드·스토리 기본 템플릿 세트<span class="camp-tag camp-2">02 제작</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>브랜드별 인스타 피드 1종·스토리 1종·유튜브 썸네일 1종</li><li>매번 새로 만들지 않고 꺼내 쓸 수 있는 구조</li><li>피그마 or 캔바 공유 링크로 팀 접근 가능하게</li></ul></div>
-          </div><div class="task-item" data-id="p2-d3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p2-d3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">부서별 업무 요청사항 수집 + 피드백 반영사항 정리<span class="camp-tag camp-2">02 제작</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>요청 폼 필요사항 여부 결정</li><li>리드타임·수정 횟수 기준 현실적으로 조정</li><li>구두 요청이 계속 들어오면 별도 조치</li></ul></div>
-          </div><div class="task-item" data-id="p2-d4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p2-d4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">에셋 라이브러리 공유 드라이브 구축<span class="camp-tag camp-2">02 제작</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>브랜드별 폴더 구조 확정</li><li>원본 파일·사용 기준·버전 관리 규칙</li><li>팀원 누구나 찾아서 쓸 수 있는 구조</li></ul></div>
-          </div></div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -633,182 +535,159 @@ body.edit-mode .task-detail li:focus{
   <section class="phase-section" id="ph3">
     <div class="phase-header">
       <span class="phase-badge" style="background:var(--p3-pale);color:var(--p3)">Phase 3</span>
-      <h2 class="phase-title">자립 구조 — 팀장 없이도 일정 수준 돌아간다</h2>
+      <h2 class="phase-title">자립 구조</h2>
       <span class="phase-period">2 ~ 3개월</span>
     </div>
-
     <div class="mission-cols">
 
       <!-- 팀장 -->
       <div>
         <div class="member-col-head" style="background:var(--chan-pale);border:1px solid #E0B090">
           <div class="member-avatar" style="background:var(--chan)">C</div>
-          <div>
-            <div class="member-name" style="color:var(--chan)">최찬솔</div>
-            <div class="member-role" style="color:#B07840">전략·외부·대표 커뮤니케이션</div>
-          </div>
+          <div><div class="member-name" style="color:var(--chan)">최찬솔</div><div class="member-role" style="color:#B07840">전략·외부·대표 커뮤니케이션</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p3-c1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p3-c1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">팀원 단독 실행 가능 업무 목록 공식 확정</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>팀장 확인 없이 실행 가능 업무 리스트</li><li>팀장 확인 필요 업무 기준 문서화</li><li>이 목록이 없으면 팀원은 계속 허락을 기다림</li></ul></div>
-          </div><div class="task-item" data-id="p3-c2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p3-c2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">팀 분기 리뷰</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>팀원이 KPI 달성률·잘된 것·못한 것 발표</li><li>다음 분기 방향 결정</li><li>팀원 스스로 다음 목표 제안하는 구조</li></ul></div>
-          </div><div class="task-item" data-id="p3-c3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>팀원이 KPI 달성률·잘된 것·못한 것 발표</li><li>B2B: 가맹DB 채널별 달성률 / B2C: 조회수·언급량 증감률 달성률 각각 리뷰</li><li>다음 분기 방향 결정 — 팀원 스스로 다음 목표 제안</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p3-c3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">대행사 분기 재검토 보고서 완성</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>대행사별 집행 비용·성과·효율 비교</li><li>재계약 여부 의견 포함</li><li>본부장 공유 후 의사결정</li></ul></div>
-          </div><div class="task-item" data-id="p3-c4">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>브이웍스 — 분기 DB 500건 달성 여부 + CPA 4만원 기준 성과 비교</li><li>아프니까사장이다·마이프차 — 조회수 데이터 확보 후 CPV·CPA 산출</li><li>재계약 여부 의견 포함 후 본부장 공유</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p3-c4">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">다음 팀원 미션 정의</span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>현재 역량 파악</li><li>데이터 기반으로 어느 쪽이 더 급한지 판단</li><li>JD 초안 작성 후 전달</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>현재 역량 파악 + 데이터 기반으로 어느 쪽이 더 급한지 판단</li><li>JD 초안 작성 후 전달</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 마케팅사원 -->
       <div>
         <div class="member-col-head" style="background:var(--mk-pale);border:1px solid #A0C8D8">
           <div class="member-avatar" style="background:var(--mk)">M</div>
-          <div>
-            <div class="member-name" style="color:var(--mk)">마케팅 심수민</div>
-            <div class="member-role" style="color:#2A6A8A">루틴 소유 + 리포트 자립</div>
-          </div>
+          <div><div class="member-name" style="color:var(--mk)">마케팅 심수민</div><div class="member-role" style="color:#2A6A8A">루틴 소유 + 리포트 자립</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p3-m1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p3-m1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
-              <span class="task-text">채널 운영 루틴 단독 소유 (팀장 확인 없이)<span class="camp-tag camp-3">03 집행 자립</span></span>
+              <span class="task-text">채널 운영 루틴 단독 소유<span class="camp-tag camp-3">03 집행 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>정해진 주기에 맞춰 업로드·집행·리포트 전 과정 단독 완주</li><li>이슈 발생 시 팀장에게 보고 후 처리</li><li>완료 기준: 한 달 연속 오류 없이 루틴 완주</li></ul></div>
-          </div><div class="task-item" data-id="p3-m2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>정해진 주기에 맞춰 업로드·집행·리포트 전 과정 단독 완주</li><li>배달앱 전환율 15%+ / 브이웍스 월 DB 150건 / 자체운영 월 DB 100건 목표 추적</li><li>이슈 발생 시 팀장에게 보고 후 처리</li><li>완료 기준: 한 달 연속 오류 없이 루틴 완주</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p3-m2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">캠페인 결과 아카이브 직접 작성<span class="camp-tag camp-4">04 리뷰 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>집행 후 "무엇을·얼마에·어떤 결과·다음엔 어떻게" 1장 정리</li><li>팀장이 쓰는 게 아니라 팀원이 쓰는 구조</li><li>노션 아카이브에 직접 업로드</li></ul></div>
-          </div><div class="task-item" data-id="p3-m3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>집행 후 "무엇을·얼마에·어떤 결과·다음엔 어떻게" 1장 정리</li><li>PPL·CF 결과는 프로모코드·상담폼 자기보고 기준으로 기록</li><li>노션 아카이브에 직접 업로드</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p3-m3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">데이터 분석 + 팀장에게 인사이트 제안<span class="camp-tag camp-4">04 리뷰 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>광고비 ÷ 채널별 유입 DB 수 = CAC</li><li>"이 채널이 가장 효율적이었습니다 — 이유는 ~" 형식으로 제안</li><li>단순 숫자 보고가 아닌 판단 포함한 보고</li></ul></div>
-          </div></div>
+            <div class="task-detail"><ul><li>CAC = 광고비 ÷ 채널별 유입 DB 수 — 채널별 효율 비교</li><li>브이웍스 CPA 4만원 / 자체운영 CPA 1만원 기준 대비 실측 비교 제안</li><li>조회수·언급량 전월비 +10% 달성 여부 분석 포함</li><li>"이 채널이 가장 효율적이었습니다 — 이유는 ~" 형식 — 단순 숫자 보고 아닌 판단 포함</li></ul></div>
+          </div>
+        </div>
       </div>
 
       <!-- 디자이너 -->
       <div>
         <div class="member-col-head" style="background:var(--ds-pale);border:1px solid #A0C890">
           <div class="member-avatar" style="background:var(--ds)">D</div>
-          <div>
-            <div class="member-name" style="color:var(--ds)">디자이너 윤지수</div>
-            <div class="member-role" style="color:#2A6A2A">시스템 운영 + 품질 기준 자립</div>
-          </div>
+          <div><div class="member-name" style="color:var(--ds)">디자이너 윤지수</div><div class="member-role" style="color:#2A6A2A">시스템 운영 + 품질 기준 자립</div></div>
         </div>
         <div class="task-list">
-
-          
-
-          
-
-          
-
-        <div class="task-item" data-id="p3-d1">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          <div class="task-item" data-id="p3-d1">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">콘텐츠 디자인 납기율 100% 한 달 유지<span class="camp-tag camp-2">02 제작 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>요청 폼 기준 납기일 내 전달 100%</li><li>납기 못 지킬 것 같으면 사전 팀장에게 공지</li><li>이 지표가 안정되면 업무량 조정 or 채용 근거</li></ul></div>
-          </div><div class="task-item" data-id="p3-d2">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+          </div>
+          <div class="task-item" data-id="p3-d2">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
-              <span class="task-text">삼대미역·인생푸드 브랜드 가이드라인 확장<span class="camp-tag camp-2">02 제작 자립</span></span>
+              <span class="task-text">삼대미역·인생식탁 브랜드 가이드라인 확장<span class="camp-tag camp-2">02 제작 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
-            <div class="task-detail"><ul><li>Phase 2에서 인생아구찜·어화락 완료 후 확장</li><li>인생푸드 진행</li><li>브랜드 가이드라인 통합 구조 구축</li></ul></div>
-          </div><div class="task-item" data-id="p3-d3">
-            <div class="task-main" onclick="expand(this)" style="position: relative;">
+            <div class="task-detail"><ul><li>Phase 2에서 인생아구찜·어화락 완료 후 확장</li><li>삼대미역 — 지역타겟 카드뉴스·릴스 채널 확장 템플릿 포함</li><li>브랜드 가이드라인 통합 구조 구축</li></ul></div>
+          </div>
+          <div class="task-item" data-id="p3-d3">
+            <div class="task-main" onclick="expand(this)" style="position:relative">
               <div class="task-chk" onclick="cycle(event,this)"></div>
               <span class="task-text">디자인 품질 기준 스스로 판단·적용<span class="camp-tag camp-2">02 제작 자립</span></span>
               <span class="task-exp">▾</span>
             </div>
             <div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div>
             <div class="task-detail"><ul><li>브랜드 가이드라인 기준으로 스스로 1차 검수</li><li>팀장에게 "이것 때문에 이렇게 했습니다" 설명 가능</li><li>수정 요청 없이 통과율 80% 이상 목표</li></ul></div>
-          </div></div>
+          </div>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- 우선순위 요약 -->
   <div class="priority-row">
     <div class="priority-card" style="background:var(--chan-pale);border-color:#E0B090">
       <div class="priority-label" style="color:var(--chan)">팀장 핵심 원칙 3가지</div>
       <ul class="priority-list">
         <li>기준을 먼저 만들고 실행을 넘긴다</li>
-        <li>간단한 원페이퍼 수준이라도 기획안을 작성.</li>
-        <li>팀원이 실패할 공간을 허용 </li>
+        <li>간단한 원페이퍼 수준이라도 기획안을 작성</li>
+        <li>팀원이 실패할 공간을 허용</li>
         <li>같은 질문이 반복되면 기록</li>
       </ul>
     </div>
     <div class="priority-card" style="background:var(--mk-pale);border-color:#A0C8D8">
-      <div class="priority-label" style="color:var(--mk)">마케팅 심수민 3개월 목표</div>
+      <div class="priority-label" style="color:var(--mk)">마케팅 심수민 3개월 목표 (수치)</div>
       <ul class="priority-list">
-        <li>채널 운영 루틴 단독 완주</li>
-        <li>데이터 수집·집계 소유</li>
-        <li>숫자 보고 → 인사이트 제안으로 성장</li>
+        <li>브이웍스 분기 DB 500건 · 자체운영 분기 300건</li>
+        <li>언급량·조회수 전월비 +10% 추적 시작</li>
+        <li>숫자 보고 → CAC 기반 인사이트 제안</li>
+        <li>배달앱 전환율 15%+ 단독 추적</li>
       </ul>
     </div>
     <div class="priority-card" style="background:var(--ds-pale);border-color:#A0C890">
       <div class="priority-label" style="color:var(--ds)">디자이너 윤지수 3개월 목표</div>
       <ul class="priority-list">
-        <li>브랜드 가이드라인 수립 완료</li>
-        <li>요청 프로세스 안정화</li>
-        <li>납기율 목표설정 + 자체 품질 판단</li>
+        <li>인생아구찜·어화락 가이드라인 분기 내 완성</li>
+        <li>요청 프로세스 안정화 + 납기율 목표 설정</li>
+        <li>자체 품질 판단 — 수정통과율 80%+</li>
       </ul>
     </div>
   </div>
@@ -817,13 +696,10 @@ body.edit-mode .task-detail li:focus{
 
 <footer>
   <strong>인생푸드 · 마케팅브랜딩팀</strong><br>
-  팀 리빌딩 플랜 — 내부용 · 작성: 최찬솔 팀장 · 2026. 06
+  팀 리빌딩 플랜 — 내부용 · 작성: 최찬솔 팀장 · 2026. 07
 </footer>
 
-<!-- 편집 힌트 바 -->
 <div class="edit-hint-bar" id="edit-hint-bar">✏️ 편집 중 — 태스크 텍스트를 클릭해 수정하세요 · 저장 버튼으로 반영</div>
-
-<!-- 편집 FAB -->
 <div id="edit-fab">
   <button class="fab-btn fab-reset" id="fab-reset" onclick="resetAll()">↩ 초기화</button>
   <button class="fab-btn fab-save" id="fab-save" onclick="saveAll()">✅ 저장</button>
@@ -831,263 +707,160 @@ body.edit-mode .task-detail li:focus{
 </div>
 
 <script>
-/* ── 상태 저장 키 ── */
-const S_KEY   = 'rebuild-state';
-const TXT_KEY = 'rebuild-texts';
+const S_KEY='rebuild-state', TXT_KEY='rebuild-texts';
+const S=JSON.parse(localStorage.getItem(S_KEY)||'{}');
+const save=()=>localStorage.setItem(S_KEY,JSON.stringify(S));
 
-const S = JSON.parse(localStorage.getItem(S_KEY)||'{}');
-const save = ()=>localStorage.setItem(S_KEY,JSON.stringify(S));
-
-/* ── 편집 모드 토글 ── */
-let editOn = false;
+let editOn=false;
 function toggleEdit(){
-  editOn = !editOn;
-  document.body.classList.toggle('edit-mode', editOn);
-  const btn = document.getElementById('fab-edit');
-  btn.textContent = editOn ? '✕ 편집 종료' : '✏️ 편집 모드';
-  btn.classList.toggle('on', editOn);
+  editOn=!editOn;
+  document.body.classList.toggle('edit-mode',editOn);
+  const btn=document.getElementById('fab-edit');
+  btn.textContent=editOn?'✕ 편집 종료':'✏️ 편집 모드';
+  btn.classList.toggle('on',editOn);
   if(editOn){
-    // ① task-text 편집 활성화
-    document.querySelectorAll('.task-text').forEach(el=>{
-      el.contentEditable = 'true';
-      el.setAttribute('spellcheck','false');
-    });
-    // ② task-detail li 편집 활성화 + × 버튼
+    document.querySelectorAll('.task-text').forEach(el=>{el.contentEditable='true';el.setAttribute('spellcheck','false');});
     document.querySelectorAll('.task-detail li').forEach(li=>{
-      li.contentEditable = 'true';
-      li.setAttribute('spellcheck','false');
+      li.contentEditable='true';li.setAttribute('spellcheck','false');
       if(!li.querySelector('.li-del')){
-        const x = document.createElement('button');
-        x.className = 'li-del';
-        x.textContent = '×';
-        x.onclick = e=>{ e.stopPropagation(); li.remove(); };
-        li.appendChild(x);
+        const x=document.createElement('button');x.className='li-del';x.textContent='×';
+        x.onclick=e=>{e.stopPropagation();li.remove();};li.appendChild(x);
       }
     });
-    // ③ task-detail ul마다 줄 추가 버튼
     document.querySelectorAll('.task-detail ul').forEach(ul=>{
       if(!ul.querySelector('.li-add')){
-        const b = document.createElement('button');
-        b.className = 'li-add';
-        b.textContent = '＋ 줄 추가';
-        b.onclick = ()=>{
-          const li = document.createElement('li');
-          li.textContent = '새 세부 내용';
-          li.contentEditable = 'true';
-          li.setAttribute('spellcheck','false');
-          const x = document.createElement('button');
-          x.className = 'li-del'; x.textContent = '×';
-          x.onclick = e=>{ e.stopPropagation(); li.remove(); };
-          li.appendChild(x);
-          ul.insertBefore(li, b);
-          li.focus();
-        };
-        ul.appendChild(b);
+        const b=document.createElement('button');b.className='li-add';b.textContent='＋ 줄 추가';
+        b.onclick=()=>{
+          const li=document.createElement('li');li.textContent='새 세부 내용';
+          li.contentEditable='true';li.setAttribute('spellcheck','false');
+          const x=document.createElement('button');x.className='li-del';x.textContent='×';
+          x.onclick=e=>{e.stopPropagation();li.remove();};
+          li.appendChild(x);ul.insertBefore(li,b);li.focus();
+        };ul.appendChild(b);
       }
     });
-    // ④ task-item 삭제 버튼
     document.querySelectorAll('.task-item').forEach(card=>{
       if(!card.querySelector('.task-del-btn')){
-        const x = document.createElement('button');
-        x.className = 'task-del-btn'; x.textContent = '×'; x.title = '태스크 삭제';
-        x.onclick = e=>{ e.stopPropagation(); if(confirm('이 태스크를 삭제할까요?')) card.remove(); };
-        card.querySelector('.task-main').style.position = 'relative';
+        const x=document.createElement('button');x.className='task-del-btn';x.textContent='×';x.title='태스크 삭제';
+        x.onclick=e=>{e.stopPropagation();if(confirm('이 태스크를 삭제할까요?'))card.remove();};
         card.querySelector('.task-main').appendChild(x);
       }
     });
-    // ⑤ task-list마다 태스크 추가 버튼
     document.querySelectorAll('.task-list').forEach(list=>{
       if(!list.querySelector('.task-add-btn')){
-        const b = document.createElement('button');
-        b.className = 'task-add-btn'; b.textContent = '＋ 태스크 추가';
-        b.onclick = ()=> addTask(list);
-        list.appendChild(b);
+        const b=document.createElement('button');b.className='task-add-btn';b.textContent='＋ 태스크 추가';
+        b.onclick=()=>addTask(list);list.appendChild(b);
       }
     });
   } else {
-    // 편집 종료
-    document.querySelectorAll('.task-text').forEach(el=>{ el.contentEditable = 'false'; });
-    document.querySelectorAll('.task-detail li').forEach(li=>{ li.contentEditable = 'false'; });
-    document.querySelectorAll('.li-del, .li-add').forEach(el=>el.remove());
+    document.querySelectorAll('.task-text').forEach(el=>{el.contentEditable='false';});
+    document.querySelectorAll('.task-detail li').forEach(li=>{li.contentEditable='false';});
+    document.querySelectorAll('.li-del,.li-add').forEach(el=>el.remove());
   }
 }
 
-/* ── 태스크 추가 ── */
-let taskCounter = 9000;
+let taskCounter=9000;
 function addTask(list){
-  const id = 'custom-' + (++taskCounter);
-  const div = document.createElement('div');
-  div.className = 'task-item';
-  div.dataset.id = id;
-  div.innerHTML = `
-    <div class="task-main" onclick="expand(this)" style="position:relative">
-      <div class="task-chk" onclick="cycle(event,this)"></div>
-      <span class="task-text" contenteditable="true" spellcheck="false">새 태스크를 입력하세요</span>
-      <span class="task-exp">▾</span>
-      <button class="task-del-btn" title="태스크 삭제" onclick="this.closest('.task-item').remove()">×</button>
-    </div>
-    <div class="task-toggle">
-      <button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button>
-      <button class="tog-btn" onclick="set(event,this,'prog')">진행</button>
-      <button class="tog-btn" onclick="set(event,this,'done')">완료</button>
-    </div>
-    <div class="task-detail"><ul><li contenteditable="true" spellcheck="false">세부 내용을 입력하세요</li></ul></div>`;
-  list.insertBefore(div, list.querySelector('.task-add-btn'));
-  applyState(div, 'todo');
-  div.querySelector('.task-text').focus();
+  const id='custom-'+(++taskCounter);
+  const div=document.createElement('div');
+  div.className='task-item';div.dataset.id=id;
+  div.innerHTML=`<div class="task-main" onclick="expand(this)" style="position:relative"><div class="task-chk" onclick="cycle(event,this)"></div><span class="task-text" contenteditable="true" spellcheck="false">새 태스크를 입력하세요</span><span class="task-exp">▾</span><button class="task-del-btn" title="태스크 삭제" onclick="this.closest('.task-item').remove()">×</button></div><div class="task-toggle"><button class="tog-btn t-todo" onclick="set(event,this,'todo')">예정</button><button class="tog-btn" onclick="set(event,this,'prog')">진행</button><button class="tog-btn" onclick="set(event,this,'done')">완료</button></div><div class="task-detail"><ul><li contenteditable="true" spellcheck="false">세부 내용을 입력하세요</li></ul></div>`;
+  list.insertBefore(div,list.querySelector('.task-add-btn'));
+  applyState(div,'todo');div.querySelector('.task-text').focus();
 }
 
-/* ── 저장 ── */
 function saveAll(){
-  // 상태 저장
   save();
-  // 텍스트 저장
-  const texts = {};
+  const texts={};
   document.querySelectorAll('.task-item').forEach(card=>{
-    const id = card.dataset.id;
-    const txt = card.querySelector('.task-text');
-    if(txt) texts[id+'__title'] = txt.innerHTML;
-    // 세부 내용 li 저장
-    const lis = card.querySelectorAll('.task-detail li');
-    texts[id+'__detail'] = [...lis].map(li=>li.textContent.trim()).filter(Boolean);
+    const id=card.dataset.id;
+    const txt=card.querySelector('.task-text');if(txt)texts[id+'__title']=txt.innerHTML;
+    const lis=card.querySelectorAll('.task-detail li');
+    texts[id+'__detail']=[...lis].map(li=>li.textContent.trim()).filter(Boolean);
   });
-  localStorage.setItem(TXT_KEY, JSON.stringify(texts));
-  // 피드백
-  const btn = document.getElementById('fab-save');
-  const orig = btn.textContent;
-  btn.textContent = '✓ 저장됨';
-  setTimeout(()=>{ btn.textContent = orig; }, 1500);
+  localStorage.setItem(TXT_KEY,JSON.stringify(texts));
+  const btn=document.getElementById('fab-save');const orig=btn.textContent;
+  btn.textContent='✓ 저장됨';setTimeout(()=>{btn.textContent=orig;},1500);
 }
 
-/* ── 초기화 ── */
 function resetAll(){
-  if(!confirm('저장된 내용을 모두 초기화할까요? 되돌릴 수 없습니다.')) return;
-  localStorage.removeItem(S_KEY);
-  localStorage.removeItem(TXT_KEY);
-  location.reload();
+  if(!confirm('저장된 내용을 모두 초기화할까요? 되돌릴 수 없습니다.'))return;
+  localStorage.removeItem(S_KEY);localStorage.removeItem(TXT_KEY);location.reload();
 }
 
-/* ── 텍스트 복원 ── */
 function restoreTexts(){
-  const texts = JSON.parse(localStorage.getItem(TXT_KEY)||'{}');
-  Object.entries(texts).forEach(([key, val])=>{
+  const texts=JSON.parse(localStorage.getItem(TXT_KEY)||'{}');
+  Object.entries(texts).forEach(([key,val])=>{
     if(key.endsWith('__title')){
-      const id = key.replace('__title','');
-      const card = document.querySelector(`.task-item[data-id="${id}"]`);
-      if(card){ const txt=card.querySelector('.task-text'); if(txt) txt.innerHTML=val; }
+      const id=key.replace('__title','');
+      const card=document.querySelector(`.task-item[data-id="${id}"]`);
+      if(card){const txt=card.querySelector('.task-text');if(txt)txt.innerHTML=val;}
     } else if(key.endsWith('__detail')){
-      const id = key.replace('__detail','');
-      const card = document.querySelector(`.task-item[data-id="${id}"]`);
-      if(card && Array.isArray(val)){
-        const ul = card.querySelector('.task-detail ul');
-        if(ul){
-          ul.innerHTML = '';
-          val.forEach(t=>{ const li=document.createElement('li'); li.textContent=t; ul.appendChild(li); });
-        }
+      const id=key.replace('__detail','');
+      const card=document.querySelector(`.task-item[data-id="${id}"]`);
+      if(card&&Array.isArray(val)){
+        const ul=card.querySelector('.task-detail ul');
+        if(ul){ul.innerHTML='';val.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li);});}
       }
     } else {
-      // 구버전 호환
-      const card = document.querySelector(`.task-item[data-id="${key}"]`);
-      if(card){ const txt=card.querySelector('.task-text'); if(txt) txt.innerHTML=val; }
+      const card=document.querySelector(`.task-item[data-id="${key}"]`);
+      if(card){const txt=card.querySelector('.task-text');if(txt)txt.innerHTML=val;}
     }
   });
 }
 
-function getCard(el){return el.closest('.task-item')}
-function getChk(card){return card.querySelector('.task-chk')}
-function getBtns(card){return card.querySelectorAll('.tog-btn')}
+function getCard(el){return el.closest('.task-item');}
+function getChk(card){return card.querySelector('.task-chk');}
+function getBtns(card){return card.querySelectorAll('.tog-btn');}
 
-function applyState(card, st){
-  const id = card.dataset.id;
-  S[id] = st;
-  const chk = getChk(card);
-  const btns = getBtns(card);
-  card.classList.remove('done','prog');
-  chk.classList.remove('done-chk','prog-chk');
+function applyState(card,st){
+  const id=card.dataset.id;S[id]=st;
+  const chk=getChk(card);const btns=getBtns(card);
+  card.classList.remove('done','prog');chk.classList.remove('done-chk','prog-chk');
   btns.forEach(b=>b.classList.remove('t-done','t-prog','t-todo'));
-  if(st==='done'){card.classList.add('done');chk.classList.add('done-chk');btns[2].classList.add('t-done')}
-  else if(st==='prog'){card.classList.add('prog');chk.classList.add('prog-chk');btns[1].classList.add('t-prog')}
-  else{btns[0].classList.add('t-todo')}
+  if(st==='done'){card.classList.add('done');chk.classList.add('done-chk');btns[2].classList.add('t-done');}
+  else if(st==='prog'){card.classList.add('prog');chk.classList.add('prog-chk');btns[1].classList.add('t-prog');}
+  else{btns[0].classList.add('t-todo');}
 }
 
-function cycle(e, chkEl){
-  e.stopPropagation();
-  const card = getCard(chkEl);
-  const cur = S[card.dataset.id]||'todo';
-  const next = cur==='todo'?'prog':cur==='prog'?'done':'todo';
-  applyState(card,next); save(); updateProg();
+function cycle(e,chkEl){
+  e.stopPropagation();const card=getCard(chkEl);
+  const cur=S[card.dataset.id]||'todo';
+  const next=cur==='todo'?'prog':cur==='prog'?'done':'todo';
+  applyState(card,next);save();updateProg();
 }
 
-function set(e, btn, st){
-  e.stopPropagation();
-  const card = getCard(btn);
-  applyState(card,st); save(); updateProg();
+function set(e,btn,st){
+  e.stopPropagation();const card=getCard(btn);
+  applyState(card,st);save();updateProg();
 }
 
-
-function addLiTo(btn){
-  const ul = btn.previousElementSibling;
-  if(!ul) return;
-  const li = document.createElement('li');
-  li.textContent = '새 항목';
-  li.contentEditable = 'true';
-  li.setAttribute('data-editable','1');
-  const xb = document.createElement('button');
-  xb.className = 'del-li-btn'; xb.textContent = '×';
-  xb.onclick = e => { e.stopPropagation(); li.remove(); };
-  li.appendChild(xb);
-  ul.appendChild(li);
-  li.focus();
-}
-
-function cycleChk(e,el){ e.stopPropagation(); if(typeof cycle==='function') cycle(e,el); }
-function setTog(e,el,s){ if(typeof set==='function') set(e,el,s); }
+/* ── 핵심 수정: closest로 task-item 찾은 후 querySelector로 직접 탐색 ── */
 function expand(mainEl){
-  const det = mainEl.nextElementSibling.nextElementSibling;
-  const exp = mainEl.querySelector('.task-exp');
-  if(!det) return;
-  const open = det.classList.contains('open');
+  const card=mainEl.closest('.task-item');
+  const det=card.querySelector('.task-detail');
+  const exp=mainEl.querySelector('.task-exp');
+  if(!det)return;
+  const open=det.classList.contains('open');
   det.classList.toggle('open',!open);
-  if(exp) exp.classList.toggle('open',!open);
+  if(exp)exp.classList.toggle('open',!open);
 }
 
 function updateProg(){
-  const all = document.querySelectorAll('.task-item');
-  const total = all.length;
-  let done=0;
-  all.forEach(c=>{if((S[c.dataset.id]||'todo')==='done') done++});
-  const pct = total?Math.round(done/total*100):0;
+  const all=document.querySelectorAll('.task-item');
+  const total=all.length;let done=0;
+  all.forEach(c=>{if((S[c.dataset.id]||'todo')==='done')done++;});
+  const pct=total?Math.round(done/total*100):0;
   document.getElementById('pFill').style.width=pct+'%';
   document.getElementById('pCount').textContent=done+' / '+total;
   document.getElementById('sumDone').textContent=done;
   document.getElementById('sumTotal').textContent=total;
 }
 
-function scrollTo(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
-// init
-document.querySelectorAll('.task-item').forEach(card=>{
-  applyState(card, S[card.dataset.id]||'todo');
-});
+document.querySelectorAll('.task-item').forEach(card=>{applyState(card,S[card.dataset.id]||'todo');});
 restoreTexts();
 updateProg();
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body></html>
