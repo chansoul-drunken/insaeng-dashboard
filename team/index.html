@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko"><head>
+<html lang="ko">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>인생푸드 마케팅브랜딩팀 — 2026 팀 대시보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Noto+Serif+KR:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <style>
@@ -347,7 +348,7 @@ body.edit-mode .principle-add{display:block}
 
 </style>
 </head>
-<body class="">
+<body>
 
 <!-- HEADER -->
 <header class="site-header">
@@ -364,11 +365,11 @@ body.edit-mode .principle-add{display:block}
     </div>
     <div class="header-right">
       <div class="auth-badge" onclick="openAuthModal()" id="auth-badge">
-        <span class="auth-dot active" id="auth-dot" style="background: rgb(90, 191, 122);"></span>
-        <span id="auth-label">최찬솔 (전체 편집)</span>
+        <span class="auth-dot" id="auth-dot"></span>
+        <span id="auth-label">접속자 선택</span>
         <span style="opacity:.5">▾</span>
       </div>
-      <div class="last-upd">마지막 업데이트: <span id="last-upd-val">7월 2일 오후 06:31</span></div>
+      <div class="last-upd">마지막 업데이트: <span id="last-upd-val">—</span></div>
     </div>
   </div>
 </header>
@@ -382,7 +383,7 @@ body.edit-mode .principle-add{display:block}
     <button class="int-btn flex-btn-style" id="flex-btn" onclick="openIntLink('flex')">🏢 Flex</button>
     <div class="int-sep"></div>
     <div class="int-right">
-      <span class="week-label" id="week-label">이번 주: 6/29 ~ 7/5</span>
+      <span class="week-label" id="week-label"></span>
       <div id="sync-badge" style="display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:12px;background:var(--surface-alt);font-size:11px;color:var(--ink-muted);cursor:pointer" onclick="openSettings()" title="Firebase 동기화 상태">
         <span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:#CCCCCC;flex-shrink:0"></span>
         <span id="sync-label">공유 미설정</span>
@@ -399,10 +400,10 @@ body.edit-mode .principle-add{display:block}
     <div class="qtab-bar" id="qtabs">
       <button class="qtab" onclick="switchQ(1,this)">1분기</button>
       <button class="qtab" onclick="switchQ(2,this)">2분기</button>
-      <button class="qtab active" onclick="switchQ(3,this)">3분기</button>
+      <button class="qtab" onclick="switchQ(3,this)">3분기</button>
       <button class="qtab" onclick="switchQ(4,this)">4분기</button>
     </div>
-    <span style="font-size:12px;color:var(--ink-muted)" id="q-period-label">3분기 (7월~9월)</span>
+    <span style="font-size:12px;color:var(--ink-muted)" id="q-period-label"></span>
   </div>
 
   <div class="dashboard-grid">
@@ -538,62 +539,18 @@ body.edit-mode .principle-add{display:block}
       <div class="card" id="goals-card" data-section="shared">
         <div class="card-head">
           <div class="card-icon" style="background:var(--blue-pale)">🎯</div>
-          <span class="card-title">목표 &amp; 진척사항</span>
-          <span style="font-size:11px;color:var(--ink-muted);margin-left:4px" id="goals-q-label">· 3분기</span>
+          <span class="card-title">목표 & 진척사항</span>
+          <span style="font-size:11px;color:var(--ink-muted);margin-left:4px" id="goals-q-label"></span>
           <button class="card-action" onclick="addGoal()">+ 목표 추가</button>
         </div>
         <div class="card-body">
-          <div id="goals-list"><div class="goal-item" data-goal-idx="0">
-      <div class="goal-top">
-        <span class="goal-badge" style="background:var(--b2b);color:#fff" data-editable="1">Track A · B2B</span>
-        <span class="goal-title" data-editable="1">가맹 상담 유입 채널 분리 + 수기 집계 시작</span>
-        <span class="goal-pct" data-editable="1">0%</span>
-        
-      </div>
-      <div class="goal-track"><div class="goal-fill" style="width:0%;background:var(--b2b)"></div></div>
-      <div class="goal-slider-wrap">
-        <input type="range" class="goal-slider" min="0" max="100" value="0" style="accent-color:var(--b2b)">
-      </div>
-      <div class="goal-sub" data-editable="1">채널별 링크 분리 완료 · 상담 폼 유입 경로 항목 추가 · 전사 짱돌 ★2 직결</div></div><div class="goal-item" data-goal-idx="1">
-      <div class="goal-top">
-        <span class="goal-badge" style="background:var(--b2c);color:#fff" data-editable="1">Track B · B2C</span>
-        <span class="goal-title" data-editable="1">브랜드 언급량 베이스라인 수집 (검색량·소셜·저장율)</span>
-        <span class="goal-pct" data-editable="1">0%</span>
-        
-      </div>
-      <div class="goal-track"><div class="goal-fill" style="width:0%;background:var(--b2c)"></div></div>
-      <div class="goal-slider-wrap">
-        <input type="range" class="goal-slider" min="0" max="100" value="0" style="accent-color:var(--b2c)">
-      </div>
-      <div class="goal-sub" data-editable="1">네이버 검색량(데이터랩) · 소셜 언급량(썸트렌드) · 인스타 저장율·공유율 · 블로그 자발 포스팅 수 · 유튜브 시청완료율 — 월별 모니터링 시트 통합 운영</div></div><div class="goal-item" data-goal-idx="2">
-      <div class="goal-top">
-        <span class="goal-badge" style="background:var(--br);color:#fff" data-editable="1">Track C · 브랜딩</span>
-        <span class="goal-title" data-editable="1">4개 브랜드 현황 진단 + 메시지 체계 초안</span>
-        <span class="goal-pct" data-editable="1">0%</span>
-        
-      </div>
-      <div class="goal-track"><div class="goal-fill" style="width:0%;background:var(--br)"></div></div>
-      <div class="goal-slider-wrap">
-        <input type="range" class="goal-slider" min="0" max="100" value="0" style="accent-color:var(--br)">
-      </div>
-      <div class="goal-sub" data-editable="1">인생아구찜·어화락 → 삼대미역·인생식탁 순서</div></div><div class="goal-item" data-goal-idx="3">
-      <div class="goal-top">
-        <span class="goal-badge" style="background:var(--green);color:#fff" data-editable="1">Track D · 팀 구축</span>
-        <span class="goal-title" data-editable="1">S1~S6 골조 수립 완료 (6개 항목)</span>
-        <span class="goal-pct" data-editable="1">0%</span>
-        
-      </div>
-      <div class="goal-track"><div class="goal-fill" style="width:0%;background:var(--green)"></div></div>
-      <div class="goal-slider-wrap">
-        <input type="range" class="goal-slider" min="0" max="100" value="0" style="accent-color:var(--green)">
-      </div>
-      <div class="goal-sub" data-editable="1">Phase 1 완료 기준 = S1~S6 체크 완료 · 다음 분기 Phase 2 진입</div></div></div>
+          <div id="goals-list"></div>
           <button class="goal-add" onclick="addGoal()">＋ 목표 추가</button>
         </div>
         <!-- 인원별 업무 구분선 -->
         <div class="member-section-divider">
           <span style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted)">👤 인원별 업무</span>
-          <span style="font-size:11px;color:var(--ink-muted)" id="work-q-label">· 3분기</span>
+          <span style="font-size:11px;color:var(--ink-muted)" id="work-q-label"></span>
         </div>
         <!-- 3열 인원별 업무 -->
         <div class="members-grid">
@@ -602,83 +559,33 @@ body.edit-mode .principle-add{display:block}
               <div class="role-avatar" style="background:var(--chan);width:26px;height:26px;font-size:11px">C</div>
               <div style="flex:1">
                 <div style="font-size:12px;font-weight:700;color:var(--chan)">최찬솔</div>
-                <div class="member-col-prog" id="prog-chan">0 / 4 완료</div>
+                <div class="member-col-prog" id="prog-chan">—</div>
               </div>
             </div>
-            <div id="work-chan"><div class="work-item" data-work-idx="0" data-member="chan">
-        <div class="work-dot" style="background:var(--chan)"></div>
-        <div class="work-text" data-editable="1">팀원 단독 실행 업무 목록 확정</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="1" data-member="chan">
-        <div class="work-dot" style="background:var(--chan)"></div>
-        <div class="work-text" data-editable="1">분기 리뷰 — 팀원과 함께 진행</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="2" data-member="chan">
-        <div class="work-dot" style="background:var(--chan)"></div>
-        <div class="work-text" data-editable="1">대행사 재검토 보고서 (성과 기반)</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="3" data-member="chan">
-        <div class="work-dot" style="background:var(--chan)"></div>
-        <div class="work-text" data-editable="1">브랜드 가이드 초안 완성</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div></div>
-            
+            <div id="work-chan"></div>
+            <button class="work-add" onclick="addWork('chan')">＋ 항목 추가</button>
           </div>
           <div class="member-col" data-member-section="mk">
             <div class="member-col-head">
               <div class="role-avatar" style="background:var(--mk);width:26px;height:26px;font-size:11px">심</div>
               <div style="flex:1">
                 <div style="font-size:12px;font-weight:700;color:var(--mk)">마케팅 심수민</div>
-                <div class="member-col-prog" id="prog-mk">0 / 3 완료</div>
+                <div class="member-col-prog" id="prog-mk">—</div>
               </div>
             </div>
-            <div id="work-mk"><div class="work-item" data-work-idx="0" data-member="mk">
-        <div class="work-dot" style="background:var(--mk)"></div>
-        <div class="work-text" data-editable="1">채널 운영 루틴화</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="1" data-member="mk">
-        <div class="work-dot" style="background:var(--mk)"></div>
-        <div class="work-text" data-editable="1">캠페인 결과 아카이브 (분기별)</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="2" data-member="mk">
-        <div class="work-dot" style="background:var(--mk)"></div>
-        <div class="work-text" data-editable="1">지표 분석 + 인사이트 제안</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div></div>
-            
+            <div id="work-mk"></div>
+            <button class="work-add" onclick="addWork('mk')">＋ 항목 추가</button>
           </div>
           <div class="member-col" data-member-section="ds">
             <div class="member-col-head">
               <div class="role-avatar" style="background:var(--ds);width:26px;height:26px;font-size:11px">윤</div>
               <div style="flex:1">
                 <div style="font-size:12px;font-weight:700;color:var(--ds)">디자이너 윤지수</div>
-                <div class="member-col-prog" id="prog-ds">0 / 3 완료</div>
+                <div class="member-col-prog" id="prog-ds">—</div>
               </div>
             </div>
-            <div id="work-ds"><div class="work-item" data-work-idx="0" data-member="ds">
-        <div class="work-dot" style="background:var(--ds)"></div>
-        <div class="work-text" data-editable="1">콘텐츠 </div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="1" data-member="ds">
-        <div class="work-dot" style="background:var(--ds)"></div>
-        <div class="work-text" data-editable="1">보유 브랜드 가이드라인 수립</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div><div class="work-item" data-work-idx="2" data-member="ds">
-        <div class="work-dot" style="background:var(--ds)"></div>
-        <div class="work-text" data-editable="1">디자인 품질 기준 자립 (자체 판단 기준 확보)</div>
-        <span class="work-status status-todo" onclick="cycleStatus(this,this.closest('.work-item'))">
-          예정</span>
-        </div></div>
-            
+            <div id="work-ds"></div>
+            <button class="work-add" onclick="addWork('ds')">＋ 항목 추가</button>
           </div>
         </div>
       </div>
@@ -692,24 +599,31 @@ body.edit-mode .principle-add{display:block}
         </div>
         <div class="card-body">
           <div id="notice-list">
+      <div class="notice-item">
+        <div class="notice-pin">📌</div>
+        <div class="notice-body">
+          <div class="notice-text"><span class="notice-tag" style="background:#EAF0FB;color:#1A3E7A">예산현황</span>확정 6억(배달앱 3억+콘텐츠 3억) + 추가요청 1.2억 + PPL 0.2억 = 총 7.4억 추정</div>
+          <div class="notice-date">2026.07 기준</div>
+        </div>
+      </div>
             <div class="notice-item">
               <div class="notice-pin">📌</div>
               <div class="notice-body">
-                <div class="notice-text" data-editable="1"><span class="notice-tag" style="background:var(--chan-pale);color:var(--chan)">중요</span>매주 팀 미팅 ??</div>
+                <div class="notice-text" data-editable="1"><span class="notice-tag" style="background:var(--chan-pale);color:var(--chan)">중요</span>매주 월요일 팀 미팅 30분 — 완료·계획·이슈 3가지</div>
                 <div class="notice-date" data-editable="1">2026.06.25</div>
               </div>
-              
+              <button class="notice-del" onclick="this.closest('.notice-item').remove()">×</button>
             </div>
             <div class="notice-item">
               <div class="notice-pin">📌</div>
               <div class="notice-body">
-                <div class="notice-text" data-editable="1"><span class="notice-tag" style="background:var(--blue-pale);color:var(--blue)">공유</span>업무 요청은 ??</div>
+                <div class="notice-text" data-editable="1"><span class="notice-tag" style="background:var(--blue-pale);color:var(--blue)">공유</span>업무 요청은 슬랙 #마케팅요청 채널 단일화. 구두 요청 종료.</div>
                 <div class="notice-date" data-editable="1">2026.06.23</div>
               </div>
-              
+              <button class="notice-del" onclick="this.closest('.notice-item').remove()">×</button>
             </div>
           </div>
-          
+          <button class="notice-add" onclick="addNotice()">＋ 공지 추가</button>
         </div>
       </div>
 
@@ -724,10 +638,10 @@ body.edit-mode .principle-add{display:block}
         <div class="sw-head"><span class="sw-icon">📊</span><span class="sw-title" data-editable="1" id="sw-title-kpi">이번 달 KPI</span></div>
         <div class="sw-body">
           <div class="kpi-grid">
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-1">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1" id="kpi-val-1">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-1">이번 달 신규 건 · 목표: —건</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-2">A · 광고</div><div class="kpi-val" data-editable="1" id="kpi-val-2">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-2">상담 1건당 광고비 · 목표: —만원</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-3">B · 브랜드 언급량</div><div class="kpi-val" data-editable="1" id="kpi-val-3">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-3">소셜·검색·블로그 합산 · 베이스라인 수집 중</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-4">B · 콘텐츠 저장율</div><div class="kpi-val" data-editable="1" id="kpi-val-4">—</div><div class="kpi-sub" data-editable="1" id="kpi-sub-4">인스타 최근 집행 기준</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-1">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1" id="kpi-val-1">월 100건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-1">마케팅팀 자체운영 기준 · 분기 목표 300건 · CPA 1만원</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-2">A · 광고 CAC</div><div class="kpi-val" data-editable="1" id="kpi-val-2">4만원/건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-2">브이웍스 기준 CPA · 분기 목표 DB 500건</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-3">B · 브랜드 언급량</div><div class="kpi-val" data-editable="1" id="kpi-val-3">+10% MoM</div><div class="kpi-sub" data-editable="1" id="kpi-sub-3">전월 대비 증감률 · 블랙키위·썸트렌드 수집</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-4">B · 콘텐츠 저장율</div><div class="kpi-val" data-editable="1" id="kpi-val-4">3%+</div><div class="kpi-sub" data-editable="1" id="kpi-sub-4">인스타 릴스 기준 · CPV 62.5원 · 분기 목표 30만 조회</div></div>
           </div>
         </div>
       </div>
@@ -738,17 +652,17 @@ body.edit-mode .principle-add{display:block}
         <div class="sw-body">
           <div class="link-item" style="cursor:pointer" onclick="openIntLink('slack')">
             <div class="link-icon" style="background:var(--slack-pale)">💬</div>
-            <div class="link-text"><div class="link-name">Slack — 팀 채널</div><div class="link-desc" id="link-slack-desc">URL 미설정 — ⚙️ 설정에서 입력</div></div>
+            <div class="link-text"><div class="link-name">Slack — 팀 채널</div><div class="link-desc" id="link-slack-desc">URL 미설정 — 설정에서 입력</div></div>
             <span class="link-arrow">→</span>
           </div>
           <div class="link-item" style="cursor:pointer" onclick="openIntLink('drive')">
             <div class="link-icon" style="background:var(--gdrive-pale)">📁</div>
-            <div class="link-text"><div class="link-name">Google Drive</div><div class="link-desc" id="link-drive-desc">URL 미설정 — ⚙️ 설정에서 입력</div></div>
+            <div class="link-text"><div class="link-name">Google Drive</div><div class="link-desc" id="link-drive-desc">URL 미설정 — 설정에서 입력</div></div>
             <span class="link-arrow">→</span>
           </div>
           <div class="link-item" style="cursor:pointer" onclick="openIntLink('cal')">
             <div class="link-icon" style="background:var(--gcal-pale)">📅</div>
-            <div class="link-text"><div class="link-name">Google 캘린더</div><div class="link-desc" id="link-cal-desc">URL 미설정 — ⚙️ 설정에서 입력</div></div>
+            <div class="link-text"><div class="link-name">Google 캘린더</div><div class="link-desc" id="link-cal-desc">URL 미설정 — 설정에서 입력</div></div>
             <span class="link-arrow">→</span>
           </div>
           <div class="link-item" style="cursor:pointer" onclick="openIntLink('flex')">
@@ -758,7 +672,7 @@ body.edit-mode .principle-add{display:block}
           </div>
           <div class="link-item" style="cursor:pointer" onclick="openIntLink('notion')">
             <div class="link-icon" style="background:#F0EEF8">📝</div>
-            <div class="link-text"><div class="link-name">Notion — 팀 문서</div><div class="link-desc" id="link-notion-desc">URL 미설정 — ⚙️ 설정에서 입력</div></div>
+            <div class="link-text"><div class="link-name">Notion — 팀 문서</div><div class="link-desc" id="link-notion-desc">URL 미설정 — 설정에서 입력</div></div>
             <span class="link-arrow">→</span>
           </div>
         </div>
@@ -780,10 +694,10 @@ body.edit-mode .principle-add{display:block}
       <div class="side-widget" data-section="shared">
         <div class="sw-head"><span class="sw-icon">⚡</span><span class="sw-title" data-editable="1" id="sw-title-principle">팀 핵심 원칙</span></div>
         <div class="sw-body" id="principle-list" style="display:flex;flex-direction:column;gap:10px">
-          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-1">기준을 먼저 만들고 실행을 넘긴다</span></div>
-          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-2">팀원이 실패할 공간을 허용</span></div>
-          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-3">같은 질문이 반복되면 기록</span></div>
-          <div class="principle-item" style="display: flex; gap: 8px; align-items: flex-start; position: relative;"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">04</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" spellcheck="false">간단한 원페이퍼 수준이라도 기록해놓기</span></div>
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">01</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-1">기준을 먼저 만들고 실행을 넘긴다</span><button class="principle-del">×</button></div>
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">02</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-2">팀원이 실패할 공간을 허용한다 (작은 실패가 체화됨)</span><button class="principle-del">×</button></div>
+          <div class="principle-item" style="display:flex;gap:8px;align-items:flex-start;position:relative"><span class="principle-num" style="color:var(--gold);flex-shrink:0;font-weight:700">03</span><span class="principle-text" style="font-size:13px;flex:1" data-editable="1" id="principle-3">같은 질문이 2번 오면 문서로 만든다</span><button class="principle-del">×</button></div>
+          <button class="principle-add" onclick="addPrinciple()">＋ 원칙 추가</button>
         </div>
       </div>
 
@@ -796,9 +710,14 @@ body.edit-mode .principle-add{display:block}
   팀 대시보드 — 팀원 누구나 접속 후 편집 가능
 </footer>
 
-<div class="edit-hint" id="edit-hint">✏️ 팀장 모드 — 전체 수정 가능</div>
+<div class="edit-hint" id="edit-hint">✏️ 편집 중</div>
 
-
+<div id="edit-bar">
+  <button class="eb-btn" id="eb-export-btn" onclick="exportHTML()" style="background:#1A3E6F;color:#fff">⬇ HTML 내보내기</button>
+  <button class="eb-btn eb-settings" id="eb-settings-btn" onclick="openSettings()">⚙️ 연동 설정</button>
+  <button class="eb-btn eb-save" id="eb-save-btn" onclick="saveAll()">✅ 저장</button>
+  <button class="eb-btn eb-edit" id="eb-edit-btn" onclick="toggleEdit()">✏️ 편집 모드</button>
+</div>
 
 <!-- AUTH MODAL -->
 <div class="modal-overlay" id="auth-modal">
@@ -824,7 +743,7 @@ body.edit-mode .principle-add{display:block}
     </div>
     <div class="pin-field" id="pin-field">
       <div class="field-label">팀장 PIN (설정된 경우)</div>
-      <input class="field-input" id="pin-input" type="password" placeholder="PIN 입력 (없으면 빈칸으로 진행)" maxlength="8">
+      <input class="field-input" id="pin-input" type="password" placeholder="PIN 입력 (없으면 빈칸으로 진행)" maxlength="8"/>
     </div>
     <div class="modal-actions">
       <button class="btn-sec" onclick="closeAuthModal()">취소</button>
@@ -842,36 +761,36 @@ body.edit-mode .principle-add{display:block}
     <div class="modal-section">💬 Slack</div>
     <div class="field-group">
       <div class="field-label"><span class="fl-badge" style="background:var(--slack-pale);color:var(--slack)">Slack</span>팀 채널 URL</div>
-      <input class="field-input" id="cfg-slack" type="url" placeholder="https://app.slack.com/client/...">
+      <input class="field-input" id="cfg-slack" type="url" placeholder="https://app.slack.com/client/..."/>
     </div>
 
     <div class="modal-section">📁 Google Drive</div>
     <div class="field-group">
       <div class="field-label"><span class="fl-badge" style="background:var(--gdrive-pale);color:var(--gdrive)">Drive</span>팀 폴더 URL</div>
-      <input class="field-input" id="cfg-drive" type="url" placeholder="https://drive.google.com/drive/folders/...">
+      <input class="field-input" id="cfg-drive" type="url" placeholder="https://drive.google.com/drive/folders/..."/>
     </div>
 
     <div class="modal-section">📅 Google 캘린더</div>
     <div class="field-group">
       <div class="field-label"><span class="fl-badge" style="background:var(--gcal-pale);color:var(--gcal)">Calendar</span>캘린더 링크 URL</div>
-      <input class="field-input" id="cfg-cal-link" type="url" placeholder="https://calendar.google.com/calendar/r">
+      <input class="field-input" id="cfg-cal-link" type="url" placeholder="https://calendar.google.com/calendar/r"/>
     </div>
     <div class="field-group">
       <div class="field-label"><span class="fl-badge" style="background:var(--gcal-pale);color:var(--gcal)">임베드</span>캘린더 임베드 URL</div>
-      <input class="field-input" id="cfg-cal-embed" type="url" placeholder="https://calendar.google.com/calendar/embed?src=...">
+      <input class="field-input" id="cfg-cal-embed" type="url" placeholder="https://calendar.google.com/calendar/embed?src=..."/>
       <div style="font-size:11px;color:var(--ink-muted);margin-top:4px">Google 캘린더 → 설정 → [캘린더] → 캘린더 통합 → 공개 URL</div>
     </div>
 
     <div class="modal-section">📝 Notion</div>
     <div class="field-group">
       <div class="field-label">팀 Notion 페이지 URL</div>
-      <input class="field-input" id="cfg-notion" type="url" placeholder="https://www.notion.so/...">
+      <input class="field-input" id="cfg-notion" type="url" placeholder="https://www.notion.so/..."/>
     </div>
 
     <div class="modal-section">🏢 Flex HR</div>
     <div class="field-group">
       <div class="field-label">Flex 접속 URL</div>
-      <input class="field-input" id="cfg-flex" type="url" placeholder="https://app.flexhrd.com">
+      <input class="field-input" id="cfg-flex" type="url" placeholder="https://app.flexhrd.com"/>
     </div>
 
     <div class="modal-section">🔥 Firebase 실시간 공유</div>
@@ -887,14 +806,16 @@ body.edit-mode .principle-add{display:block}
     </details>
     <div class="field-group">
       <div class="field-label">Firebase 구성 코드 (JSON)</div>
-      <textarea class="field-input" id="cfg-firebase" rows="5" placeholder="{&quot;apiKey&quot;:&quot;AIzaSy...&quot;,&quot;authDomain&quot;:&quot;project.firebaseapp.com&quot;,&quot;databaseURL&quot;:&quot;https://project-default-rtdb.firebaseio.com&quot;,&quot;projectId&quot;:&quot;project&quot;,&quot;storageBucket&quot;:&quot;project.appspot.com&quot;,&quot;messagingSenderId&quot;:&quot;123&quot;,&quot;appId&quot;:&quot;1:123:web:abc&quot;}" style="font-family:monospace;font-size:11.5px;resize:vertical;line-height:1.5"></textarea>
+      <textarea class="field-input" id="cfg-firebase" rows="5"
+        placeholder='{"apiKey":"AIzaSy...","authDomain":"project.firebaseapp.com","databaseURL":"https://project-default-rtdb.firebaseio.com","projectId":"project","storageBucket":"project.appspot.com","messagingSenderId":"123","appId":"1:123:web:abc"}'
+        style="font-family:monospace;font-size:11.5px;resize:vertical;line-height:1.5"></textarea>
       <div style="font-size:11px;color:var(--ink-muted);margin-top:4px">저장하면 자동 연결 · 팀원 모두 같은 코드 입력 필요</div>
     </div>
 
     <div class="modal-section">🔑 권한 설정</div>
     <div class="field-group">
       <div class="field-label">팀장 PIN (선택사항 — 없으면 누구든 팀장으로 접속 가능)</div>
-      <input class="field-input" id="cfg-pin" type="password" placeholder="숫자 또는 문자 최대 8자" maxlength="8">
+      <input class="field-input" id="cfg-pin" type="password" placeholder="숫자 또는 문자 최대 8자" maxlength="8"/>
     </div>
     <div class="field-group">
       <div class="field-label">팀원 편집 허용 범위</div>
@@ -944,12 +865,12 @@ body.edit-mode .principle-add{display:block}
     <p class="modal-desc">Google 캘린더의 임베드 URL을 입력하면 대시보드에 표시됩니다.</p>
     <div class="field-group">
       <div class="field-label">임베드 URL</div>
-      <input class="field-input" id="cfg-cal-embed2" type="url" placeholder="https://calendar.google.com/calendar/embed?src=...">
+      <input class="field-input" id="cfg-cal-embed2" type="url" placeholder="https://calendar.google.com/calendar/embed?src=..."/>
       <div style="font-size:11px;color:var(--ink-muted);margin-top:4px">구글 캘린더 → 설정 → 캘린더 선택 → 캘린더 통합 → 공개 URL 복사</div>
     </div>
     <div class="modal-actions">
       <button class="btn-sec" onclick="document.getElementById('cal-modal').classList.remove('open')">취소</button>
-      <button class="btn-primary" onclick="saveCalEmbed()">저장 &amp; 적용</button>
+      <button class="btn-primary" onclick="saveCalEmbed()">저장 & 적용</button>
     </div>
   </div>
 </div>
@@ -971,10 +892,22 @@ const DEFAULT_GOALS = {
     {badge:'Track D · 팀 구축',badgeStyle:'background:var(--green);color:#fff',title:'S1~S6 골조 수립 완료 (6개 항목)',pct:'0%',fill:'0%',fillColor:'var(--green)',sub:'Phase 1 완료 기준 = S1~S6 체크 완료 · 다음 분기 Phase 2 진입'},
   ],
   3:[
-    {badge:'Track A · B2B',badgeStyle:'background:var(--b2b);color:#fff',title:'가맹 상담 유입 채널 분리 + 수기 집계 시작',pct:'0%',fill:'0%',fillColor:'var(--b2b)',sub:'채널별 링크 분리 완료 · 상담 폼 유입 경로 항목 추가 · 전사 짱돌 ★2 직결'},
-    {badge:'Track B · B2C',badgeStyle:'background:var(--b2c);color:#fff',title:'브랜드 언급량 베이스라인 수집 (검색량·소셜·저장율)',pct:'0%',fill:'0%',fillColor:'var(--b2c)',sub:'네이버 검색량(데이터랩) · 소셜 언급량(썸트렌드) · 인스타 저장율·공유율 · 블로그 자발 포스팅 수 · 유튜브 시청완료율 — 월별 모니터링 시트 통합 운영'},
-    {badge:'Track C · 브랜딩',badgeStyle:'background:var(--br);color:#fff',title:'4개 브랜드 현황 진단 + 메시지 체계 초안',pct:'0%',fill:'0%',fillColor:'var(--br)',sub:'인생아구찜·어화락 → 삼대미역·인생식탁 순서'},
-    {badge:'Track D · 팀 구축',badgeStyle:'background:var(--green);color:#fff',title:'S1~S6 골조 수립 완료 (6개 항목)',pct:'0%',fill:'0%',fillColor:'var(--green)',sub:'Phase 1 완료 기준 = S1~S6 체크 완료 · 다음 분기 Phase 2 진입'},
+    {badge:'Track A · B2B',badgeStyle:'background:var(--b2b);color:#fff',
+     title:'가맹 DB 분기 800건 (자체 300 + 브이웍스 500 + 삼대미역 100)',
+     pct:'0%',fill:'0%',fillColor:'var(--b2b)',
+     sub:'브이웍스(메타·당근·네이버) 월 600만→분기 500건·CPA 4만원 / 자체운영 월 100건·CPA 1만원 / 삼대미역 지역타겟 분기 100건 / 채널 링크 분리+상담폼 유입경로 세분화'},
+    {badge:'Track B · B2C',badgeStyle:'background:var(--b2c);color:#fff',
+     title:'브랜디드 콘텐츠 분기 100만 조회 + 언급량 전월대비 +10%',
+     pct:'0%',fill:'0%',fillColor:'var(--b2c)',
+     sub:'분기 예산 7,500만원 / 유튜브 40만회(CPV 93.75원) / 인스타 릴스 30만회(CPV 62.5원·저장율 3%+) / 블로그 15만회 / 언급량 전월대비 +10%(블랙키위·썸트렌드) / 인지도↔전환 지표 혼용 금지'},
+    {badge:'Track C · 브랜딩',badgeStyle:'background:var(--br);color:#fff',
+     title:'인생아구찜·어화락 브랜드 가이드라인 1차 완성',
+     pct:'0%',fill:'0%',fillColor:'var(--br)',
+     sub:'컬러·폰트·로고 사용기준·SNS 톤&매너 / 완성 후 광고소재 검수 기준 연결 / 삼대미역·인생식탁은 다음 순위'},
+    {badge:'Track D · 운영',badgeStyle:'background:var(--green);color:#fff',
+     title:'배달앱 클릭→주문 전환율 15%+ · 네이버플레이스 +10%',
+     pct:'0%',fill:'0%',fillColor:'var(--green)',
+     sub:'배달앱 플랫폼광고 월 2,500만원(연 3억 확정) / 배민·쿠팡이츠·요기요 / 대시보드 백데이터 분기 검증 / 네이버 플레이스 클릭·저장수 전월대비 +10%'},
   ],
   4:[{badge:'4분기',badgeStyle:'background:var(--navy);color:#fff',title:'4분기 목표를 입력하세요',pct:'0%',fill:'0%',fillColor:'var(--navy)',sub:'진척 사항을 입력하세요'}]
 };
@@ -1963,7 +1896,14 @@ function saveCalEmbed(){
 
 
 <!-- BADGE COLOR PICKER -->
-
+<div id="badge-color-picker">
+  <div class="bcp-label">뱃지 색상</div>
+  <div class="bcp-swatches" id="bcp-swatches"></div>
+  <div class="bcp-custom">
+    <input type="color" id="bcp-custom-color" value="#2B5FA6">
+    <span>직접 선택</span>
+  </div>
+</div>
 
 <script id="badge-picker-js">
 (function(){
@@ -2054,6 +1994,5 @@ function saveCalEmbed(){
   };
 })();
 </script>
-
-
-</body></html>
+</body>
+</html>
