@@ -602,7 +602,21 @@ body.edit-mode .principle-add{display:block}
       <div class="notice-item">
         <div class="notice-pin">📌</div>
         <div class="notice-body">
-          <div class="notice-text"><span class="notice-tag" style="background:#EAF0FB;color:#1A3E7A">예산현황</span>확정 6억(배달앱 3억+콘텐츠 3억) + 추가요청 1.2억 + PPL 0.2억 = 총 7.4억 추정</div>
+          <div class="notice-text"><span class="notice-tag" style="background:#FBE8E8;color:#A32020">긴급</span>샵인샵 메타 소재 즉시 제거 → 일반 배달매장 소재로 전환 (짱돌 회의 확정)</div>
+          <div class="notice-date">2026.07.14</div>
+        </div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-pin">📌</div>
+        <div class="notice-body">
+          <div class="notice-text"><span class="notice-tag" style="background:#E5F4EE;color:#0A5C47">확정</span>3분기 짱돌 6개 확정 — 이번 주 내 팀원 포지션 계약서 작성</div>
+          <div class="notice-date">2026.07.14 분기짱돌 회의</div>
+        </div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-pin">📌</div>
+        <div class="notice-body">
+          <div class="notice-text"><span class="notice-tag" style="background:#EAF0FB;color:#1A3E7A">예산</span>확정 6억(배달앱 2.4억+콘텐츠 2.4억) + 코바코 자부담 4,500만 + PPL 특별예산 = 월 ~5,000만(연 ~6억)</div>
           <div class="notice-date">2026.07 기준</div>
         </div>
       </div>
@@ -638,10 +652,10 @@ body.edit-mode .principle-add{display:block}
         <div class="sw-head"><span class="sw-icon">📊</span><span class="sw-title" data-editable="1" id="sw-title-kpi">이번 달 KPI</span></div>
         <div class="sw-body">
           <div class="kpi-grid">
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-1">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1" id="kpi-val-1">월 100건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-1">마케팅팀 자체운영 기준 · 분기 목표 300건 · CPA 1만원</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-2">A · 광고 CAC</div><div class="kpi-val" data-editable="1" id="kpi-val-2">4만원/건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-2">브이웍스 기준 CPA · 분기 목표 DB 500건</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-3">B · 브랜드 언급량</div><div class="kpi-val" data-editable="1" id="kpi-val-3">+10% MoM</div><div class="kpi-sub" data-editable="1" id="kpi-sub-3">전월 대비 증감률 · 블랙키위·썸트렌드 수집</div></div>
-            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-4">B · 콘텐츠 저장율</div><div class="kpi-val" data-editable="1" id="kpi-val-4">3%+</div><div class="kpi-sub" data-editable="1" id="kpi-sub-4">인스타 릴스 기준 · CPV 62.5원 · 분기 목표 30만 조회</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-1">A · 가맹 상담 유입</div><div class="kpi-val" data-editable="1" id="kpi-val-1">월 DB 150건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-1">분기 목표 500건 · 진성(5점) 전환율 10% → 계약 월 5건</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2b)" data-editable="1" id="kpi-label-2">A · 광고 CAC</div><div class="kpi-val" data-editable="1" id="kpi-val-2">4만원/건</div><div class="kpi-sub" data-editable="1" id="kpi-sub-2">브이웍스 4만원 · 자체운영 4만원(역산) · 분기 총 DB 500건 목표</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-3">B · 브랜디드 콘텐츠</div><div class="kpi-val" data-editable="1" id="kpi-val-3">월 100만 조회</div><div class="kpi-sub" data-editable="1" id="kpi-sub-3">월 예산 2,000만 · 분기 300만 조회 · 인스타·블로그 중심</div></div>
+            <div class="kpi-card"><div class="kpi-label" style="color:var(--b2c)" data-editable="1" id="kpi-label-4">B · 배달 플랫폼</div><div class="kpi-val" data-editable="1" id="kpi-val-4">월 2,000만</div><div class="kpi-sub" data-editable="1" id="kpi-sub-4">연 2.4억 루틴 집행 · 점포당 주간매출 집행주 vs 미집행주 비교</div></div>
           </div>
         </div>
       </div>
@@ -892,22 +906,30 @@ const DEFAULT_GOALS = {
     {badge:'Track D · 팀 구축',badgeStyle:'background:var(--green);color:#fff',title:'S1~S6 골조 수립 완료 (6개 항목)',pct:'0%',fill:'0%',fillColor:'var(--green)',sub:'Phase 1 완료 기준 = S1~S6 체크 완료 · 다음 분기 Phase 2 진입'},
   ],
   3:[
-    {badge:'Track A · B2B',badgeStyle:'background:var(--b2b);color:#fff',
-     title:'가맹 DB 분기 800건 (자체 300 + 브이웍스 500 + 삼대미역 100)',
-     pct:'0%',fill:'0%',fillColor:'var(--b2b)',
-     sub:'브이웍스(메타·당근·네이버) 월 600만→분기 500건·CPA 4만원 / 자체운영 월 100건·CPA 1만원 / 삼대미역 지역타겟 분기 100건 / 채널 링크 분리+상담폼 유입경로 세분화'},
-    {badge:'Track B · B2C',badgeStyle:'background:var(--b2c);color:#fff',
-     title:'브랜디드 콘텐츠 분기 100만 조회 + 언급량 전월대비 +10%',
+    {badge:'① 브랜드마케팅',badgeStyle:'background:var(--b2c);color:#fff',
+     title:'월 조회수 100만회 달성 (분기 300만회)',
      pct:'0%',fill:'0%',fillColor:'var(--b2c)',
-     sub:'분기 예산 7,500만원 / 유튜브 40만회(CPV 93.75원) / 인스타 릴스 30만회(CPV 62.5원·저장율 3%+) / 블로그 15만회 / 언급량 전월대비 +10%(블랙키위·썸트렌드) / 인지도↔전환 지표 혼용 금지'},
-    {badge:'Track C · 브랜딩',badgeStyle:'background:var(--br);color:#fff',
-     title:'인생아구찜·어화락 브랜드 가이드라인 1차 완성',
-     pct:'0%',fill:'0%',fillColor:'var(--br)',
-     sub:'컬러·폰트·로고 사용기준·SNS 톤&매너 / 완성 후 광고소재 검수 기준 연결 / 삼대미역·인생식탁은 다음 순위'},
-    {badge:'Track D · 운영',badgeStyle:'background:var(--green);color:#fff',
-     title:'배달앱 클릭→주문 전환율 15%+ · 네이버플레이스 +10%',
+     sub:'월 예산 2,000만·분기 6,000만 / 인스타·블로그 중심 / 유튜브 직접운영 중단 유지 / 스레드 팀원 러프운영 검토 / PPL 연 1회 특별예산 별도(3,000~4,000만) / 코바코 정부지원 제작비 50%·자부담 4,500만 / 쿠팡플레이 OTT 미팅 확정'},
+    {badge:'② 가맹 마케팅',badgeStyle:'background:var(--b2b);color:#fff',
+     title:'분기 DB 500건 → 전환율 10% → 계약 15건',
+     pct:'0%',fill:'0%',fillColor:'var(--b2b)',
+     sub:'1~2분기 총 896건(메타436·당근233·홈피150·대표번호47·마이포차30)·전환율 3% / 핵심: 샵인샵 메타 소재 즉시 제거→일반 배달매장 소재 전환 / 삼대미역 직접운영 월 DB 100건 테스트 / 아싸 콘텐츠 리뉴얼+AX팀 템플릿 자동화'},
+    {badge:'③ 배달 플랫폼',badgeStyle:'background:var(--green);color:#fff',
+     title:'월 2,000만 루틴 집행 (연 2.4억)',
      pct:'0%',fill:'0%',fillColor:'var(--green)',
-     sub:'배달앱 플랫폼광고 월 2,500만원(연 3억 확정) / 배민·쿠팡이츠·요기요 / 대시보드 백데이터 분기 검증 / 네이버 플레이스 클릭·저장수 전월대비 +10%'},
+     sub:'성수기(8~9월) 증액 검토 / 평가기준: 점포당 주간매출 집행주 vs 미집행주 / 플랫폼별 비교 대시보드 제작 중 / "남기지 말고 다 써라"'},
+    {badge:'④ 오픈 패키지',badgeStyle:'background:var(--chan);color:#fff',
+     title:'오픈 광고 세팅 패키지 표준화 보고',
+     pct:'0%',fill:'0%',fillColor:'var(--chan)',
+     sub:'플레이스 세팅+광고 2종(~20만)+초기 리뷰 100개+3개월 목표·비용 정의 / 개설 시 마케팅 지원 300만원(재산정 필요) 점주 혜택으로 활용'},
+    {badge:'⑤ 직영 매출',badgeStyle:'background:var(--p3);color:#fff',
+     title:'매장 매출 대비 5% 기준 집행',
+     pct:'0%',fill:'0%',fillColor:'var(--p3)',
+     sub:'월 매출 1.5억이면 750만 / 플레이스 순위 아닌 매출상승 목표 / 명확한 파악 가능 여부 검토 필요'},
+    {badge:'⑥ VOC 툴',badgeStyle:'background:var(--navy);color:#fff',
+     title:'VOC 취합·분석 툴 구축 (성장운영본부 연계)',
+     pct:'0%',fill:'0%',fillColor:'var(--navy)',
+     sub:'4P+2P(Product·Price·Place·Promote·People·Process) 모니터링 대시보드 / 브랜드마케팅팀+AX팀 협의 집행 / 일일 업무 보고 15분 연계'},
   ],
   4:[{badge:'4분기',badgeStyle:'background:var(--navy);color:#fff',title:'4분기 목표를 입력하세요',pct:'0%',fill:'0%',fillColor:'var(--navy)',sub:'진척 사항을 입력하세요'}]
 };
@@ -958,25 +980,33 @@ const DEFAULT_WORK = {
       {text:'에셋 라이브러리 구축 (노션 또는 Drive)',status:'예정',cls:'status-todo'},
     ],
   },
-  3:{ // Phase 3 → 3분기
+  3:{ // 3분기 — 짱돌 6개 실행
     chan:[
-      {text:'팀원 단독 실행 업무 목록 확정',status:'예정',cls:'status-todo'},
-      {text:'분기 리뷰 — 팀원과 함께 진행',status:'예정',cls:'status-todo'},
-      {text:'대행사 재검토 보고서 (성과 기반)',status:'예정',cls:'status-todo'},
-      {text:'브랜드 가이드 초안 완성',status:'예정',cls:'status-todo'},
+      {text:'샵인샵 메타 소재 즉시 제거 → 일반 배달매장 소재 전환',status:'예정',cls:'status-todo'},
+      {text:'코바코 정부지원 제작비 집행 계획 수립 (자부담 4,500만)',status:'예정',cls:'status-todo'},
+      {text:'쿠팡플레이 OTT 광고 미팅 진행',status:'진행',cls:'status-prog'},
+      {text:'VOC 대시보드 구축 (AX팀·성장운영본부 협의)',status:'예정',cls:'status-todo'},
+      {text:'팀원 포지션 계약서 작성 (이번 주 내)',status:'예정',cls:'status-todo'},
+      {text:'오픈 광고 세팅 패키지 표준화 보고서 작성',status:'예정',cls:'status-todo'},
+      {text:'삼대미역 직접운영 월 DB 100건 테스트 시작',status:'예정',cls:'status-todo'},
+      {text:'매체 성과 대시보드 운영 (일일 15분 업무보고 연계)',status:'진행',cls:'status-prog'},
     ],
     mk:[
-      {text:'채널 운영 루틴화',status:'예정',cls:'status-todo'},
-      {text:'캠페인 결과 아카이브 (분기별)',status:'예정',cls:'status-todo'},
-      {text:'지표 분석 + 인사이트 제안',status:'예정',cls:'status-todo'},
+      {text:'메타 샵인샵 소재 OFF + 일반 배달매장 소재 교체 집행',status:'예정',cls:'status-todo'},
+      {text:'브랜디드 콘텐츠 월 100만 조회 모니터링 (인스타·블로그)',status:'예정',cls:'status-todo'},
+      {text:'삼대미역 지역타겟 직접운영 셋업 (영남·호남)',status:'예정',cls:'status-todo'},
+      {text:'아싸(자영업자 카페) 콘텐츠 리뉴얼 기획',status:'예정',cls:'status-todo'},
+      {text:'가맹 DB 월별 채널별 취합 보고 (브이웍스+자체운영)',status:'예정',cls:'status-todo'},
+      {text:'배달 플랫폼 집행주 vs 미집행주 주간매출 비교 시트 작성',status:'예정',cls:'status-todo'},
     ],
     ds:[
-      {text:'콘텐츠 ',status:'예정',cls:'status-todo'},
-      {text:'보유 브랜드 가이드라인 수립',status:'예정',cls:'status-todo'},
-      {text:'디자인 품질 기준 자립 (자체 판단 기준 확보)',status:'예정',cls:'status-todo'},
+      {text:'스레드 브랜드별 러프 운영 방식 제안',status:'예정',cls:'status-todo'},
+      {text:'인스타 릴스 브랜드별 포맷 템플릿 정비',status:'예정',cls:'status-todo'},
+      {text:'오픈 패키지 플레이스 세팅 이미지·소재 제작',status:'예정',cls:'status-todo'},
+      {text:'VOC 대시보드 UI 디자인 지원',status:'예정',cls:'status-todo'},
     ],
   },
-  4:{ // 4분기 — 직접 입력
+    4:{ // 4분기 — 직접 입력
     chan:[{text:'4분기 업무를 입력하세요',status:'예정',cls:'status-todo'}],
     mk: [{text:'4분기 업무를 입력하세요',status:'예정',cls:'status-todo'}],
     ds: [{text:'4분기 업무를 입력하세요',status:'예정',cls:'status-todo'}],
